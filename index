@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Benz Canada - Enterprise Partner Relationship Management (PRM)</title>
+    <style>
+        /* ==========================================================================
+           1. CORE DESIGN SYSTEM & VARIABLES (Midnight Black & Satin Nordic Blue)
+           ========================================================================== */
+        :root {
+            --midnight-black: #0a0c10;
+            --deep-space: #11141a;
+            --card-bg: #181d26;
+            --card-hover: #222936;
+            --nordic-blue: #00a3e0;
+            --nordic-glow: rgba(0, 163, 224, 0.15);
+            --nordic-gradient: linear-gradient(135deg, #005a9c 0%, #00a3e0 100%);
+            --accent-red: #ff3b30;
+            --accent-green: #34c759;
+            --accent-orange: #ff9500;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --text-muted: #4a5568;
+            --border-color: #2d3748;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--midnight-black);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--midnight-black);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--nordic-blue);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           2. ENTERPRISE LOGIN PORTAL STYLES
+           ========================================================================== */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--deep-space) 0%, var(--midnight-black) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--nordic-gradient);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo svg {
+            width: 60px;
+            height: 60px;
+            fill: var(--text-primary);
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--deep-space);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--nordic-blue);
+            box-shadow: 0 0 0 3px var(--nordic-glow);
+        }
+
+        .password-strength {
+            height: 4px;
+            width: 100%;
+            background: var(--deep-space);
+            border-radius: 2px;
+            margin-top: 6px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-red);
+            transition: all 0.3s ease;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .remember-me input {
+            accent-color: var(--nordic-blue);
+        }
+
+        .forgot-password {
+            color: var(--nordic-blue);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: var(--nordic-gradient);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-login:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 163, 224, 0.3);
+        }
+
+        .hud-loader {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--card-bg);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--nordic-blue);
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ==========================================================================
+           3. APPLICATION INTERFACE MASTER LAYOUT
+           ========================================================================== */
+        #app-container {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .navbar {
+            background-color: var(--deep-space);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-brand svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--text-primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .experience-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px;
+            border-radius: 30px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toggle-btn.active {
+            background: var(--nordic-gradient);
+            color: var(--text-primary);
+            box-shadow: 0 2px 8px rgba(0, 163, 224, 0.3);
+        }
+
+        .lang-selector {
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: var(--border-color);
+            color: var(--nordic-blue);
+        }
+
+        .user-profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+        }
+
+        .profile-avatar {
+            width: 24px;
+            height: 24px;
+            background: var(--nordic-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .tabs-header {
+            background: var(--midnight-black);
+            padding: 20px 40px 0 40px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 8px;
+        }
+
+        .tab-link {
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.02); }
+        .tab-link.active { color: var(--nordic-blue); border-bottom-color: var(--nordic-blue); }
+
+        .main-content {
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .view-panel { display: none; }
+        .view-panel.active { display: block; }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 1200px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 3px solid var(--nordic-blue);
+            padding-left: 10px;
+        }
+
+        /* ==========================================================================
+           4. DEALER CONSOLE & OPERATIONS SPECIFIC STYLES
+           ========================================================================== */
+        .telemetry-row { margin-bottom: 24px; }
+        .telemetry-meta { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .telemetry-label { font-weight: 600; text-transform: uppercase; font-size: 12px; color: var(--text-secondary); }
+        .telemetry-value { font-weight: 700; }
+        .progress-container { height: 8px; background: var(--deep-space); border-radius: 4px; overflow: hidden; }
+        .progress-bar { height: 100%; border-radius: 4px; transition: width 1s ease-in-out; }
+
+        /* Allocation Matrix Allocation Grid Viewer */
+        .visualizer-container {
+            background: var(--deep-space);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stage-360 {
+            width: 100%;
+            height: 420px;
+            background: radial-gradient(circle at center, #232a36 0%, var(--midnight-black) 100%);
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .allocation-map-display {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+        }
+
+        .allocation-map-display.loading { opacity: 0.3; transform: scale(0.98); }
+
+        .rotation-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 12, 16, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 6px;
+            border-radius: 30px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .angle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .angle-btn.active { background: var(--nordic-blue); color: var(--text-primary); }
+
+        .visualizer-overlay-hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--nordic-blue);
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 2px solid var(--nordic-blue);
+        }
+
+        .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        .spec-item { background: var(--deep-space); border: 1px solid var(--border-color); padding: 16px; border-radius: 8px; }
+        .spec-label { font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; }
+        .spec-value { font-size: 15px; font-weight: 700; }
+
+        .privacy-banner {
+            background: linear-gradient(90deg, rgba(0, 163, 224, 0.08) 0%, transparent 100%);
+            border: 1px solid rgba(0, 163, 224, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .toggle-switch { position: relative; display: inline-block; width: 48px; height: 24px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider-round {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--deep-space); border: 1px solid var(--border-color);
+            transition: .3s; border-radius: 24px;
+        }
+        .slider-round:before {
+            position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px;
+            background-color: var(--text-secondary); transition: .3s; border-radius: 50%;
+        }
+        input:checked + .slider-round { background-color: var(--nordic-blue); }
+        input:checked + .slider-round:before { transform: translateX(24px); background-color: var(--text-primary); }
+
+        .btn-action {
+            width: 100%; background: var(--nordic-gradient); color: white; border: none; padding: 14px;
+            border-radius: 8px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 13px;
+            transition: all 0.3s;
+        }
+        .btn-action:hover { box-shadow: 0 0 15px var(--nordic-blue); transform: translateY(-1px); }
+
+        /* MDF Checklist & Ledgers */
+        .checklist-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .checklist-item {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--deep-space); padding: 14px 16px; border-radius: 8px;
+            border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s;
+        }
+        .checklist-checkbox { accent-color: var(--nordic-blue); width: 16px; height: 16px; }
+        .checklist-name { font-size: 14px; font-weight: 600; }
+        .checklist-cost { font-size: 14px; font-weight: 700; color: var(--nordic-blue); }
+
+        .estimator-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-top: 20px; }
+        .estimator-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+        .estimator-total { font-size: 18px; font-weight: 800; color: white; border-top: 1px solid var(--border-color); padding-top: 10px; }
+
+        /* Tier Showcase Cards */
+        .showroom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .vehicle-card { background: var(--deep-space); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
+        .vehicle-card:hover { transform: translateY(-5px); border-color: var(--nordic-blue); }
+        .vehicle-img-box { height: 180px; background: #1a202c; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        .vehicle-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .vehicle-info { padding: 20px; }
+        .vehicle-tag { font-size: 10px; font-weight: 700; background: var(--nordic-blue); color: black; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+        .vehicle-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .vehicle-price { font-size: 14px; color: var(--nordic-blue); font-weight: 600; }
+
+        /* ==========================================================================
+           5. HQ CORPORATE STRATEGY BI CONSOLE STYLES
+           ========================================================================== */
+        .metric-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .metric-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .metric-header { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; }
+        .metric-trend { padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+        .metric-trend.up { background: rgba(52, 199, 89, 0.1); color: var(--accent-green); }
+        .metric-trend.down { background: rgba(255, 59, 48, 0.1); color: var(--accent-red); }
+        .metric-main-value { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+
+        .table-responsive { width: 100%; overflow-x: auto; border-radius: 8px; border: 1px solid var(--border-color); background: var(--deep-space); }
+        .data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        .data-table th { background: rgba(255,255,255,0.02); padding: 14px 16px; font-weight: 600; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); font-size: 12px; text-transform: uppercase; }
+        .data-table td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.02); }
+        .data-table tr:hover td { background: rgba(255,255,255,0.01); }
+        
+        .status-pill { padding: 4px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; display: inline-block; }
+        .status-pill.success { background: rgba(52,199,89,0.1); color: var(--accent-green); }
+        .status-pill.warning { background: rgba(255,149,0,0.1); color: var(--accent-orange); }
+
+        .ai-log-container { display: flex; flex-direction: column; gap: 12px; max-height: 380px; overflow-y: auto; }
+        .ai-log-card {
+            background: var(--deep-space); border-left: 3px solid var(--nordic-blue); padding: 14px;
+            border-radius: 0 8px 8px 0; font-size: 13px; border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+        }
+        .ai-log-meta { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+
+        /* ==========================================================================
+           6. LAUDON STRATEGIC PRM THEORETICAL CONFIGURATION FACTOR MAP
+           ========================================================================== */
+        .laudon-matrix-title { font-size: 14px; font-weight: 700; color: var(--text-secondary); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .laudon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .laudon-factor-card { background: var(--deep-space); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; transition: all 0.2s; }
+        .laudon-factor-card:hover { border-color: var(--nordic-blue); }
+        .factor-header { font-size: 11px; font-weight: 700; color: var(--nordic-blue); text-transform: uppercase; margin-bottom: 8px; }
+        .factor-body { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+    <div class="login-overlay" id="loginPortal">
+        <div class="login-card">
+            <div class="hud-loader" id="hudLoader">
+                <div class="spinner"></div>
+                <div id="loaderText" style="font-size: 13px; font-weight: 600; color: var(--nordic-blue); font-family: monospace;">INITIALIZING PRM DATA EXCHANGE LINK...</div>
+            </div>
+
+            <div class="login-logo">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M50 5 L50 50 L11 72.5 L50 50 L89 72.5 Z"/>
+                </svg>
+            </div>
+            <h2 class="login-title" id="lblLoginTitle">Mercedes-Benz Canada</h2>
+            <p class="login-subtitle" id="lblLoginSubtitle">Partner Relationship Management (PRM) Hub</p>
+
+            <form id="frmAuthentication" onsubmit="handleSecureLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" id="lblUserField">Franchise Partner ID / Email</label>
+                    <input type="text" id="txtUsername" class="form-input" required placeholder="rodrigo.garcia@toronto-mercedes.ca">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="lblPassField">Secure Gate Key</label>
+                    <input type="password" id="txtPassword" class="form-input" required oninput="evaluatePassSecurity(this.value)">
+                    <div class="password-strength" id="passStrengthRow">
+                        <div class="password-strength-bar" id="passStrengthBar"></div>
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" checked> <span id="lblRemember">Keep secure handshake active</span>
+                    </label>
+                    <a href="#" class="forgot-password" id="lblForgot">Recover Key Token</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="btnSubmitAccess">ESTABLISH ENCRYPTED GATEWAY</button>
+
+                <div class="biometric-auth" onclick="simulateBiometricPass()" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px; padding: 12px; background: var(--deep-space); border: 1px dashed var(--border-color); border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--text-secondary);">
+                    <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor;">
+                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+                    </svg>
+                    <span id="lblBiometric">Pass via Corporate Security ID</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="app-container">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M50 5 L50 50 L11 72.5 L50 50 L89 72.5 Z"/>
+                </svg>
+                <span>Mercedes-Benz Partner Sync (PRM)</span>
+            </div>
+
+            <div class="nav-controls">
+                <div class="experience-toggle">
+                    <button class="toggle-btn active" id="btnExpClient" onclick="switchDomainExperience('dealer')">DEALER PORTAL</button>
+                    <button class="toggle-btn" id="btnExpBusiness" onclick="switchDomainExperience('hq')">HQ CORPORATE CONSOLE</button>
+                </div>
+
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="triggerLanguageSwitch('es')">ES</button>
+                    <button class="lang-btn" onclick="triggerLanguageSwitch('en')">EN</button>
+                    <button class="lang-btn" onclick="triggerLanguageSwitch('fr')">FR</button>
+                </div>
+
+                <div class="user-profile-badge">
+                    <div class="profile-avatar">RG</div>
+                    <span style="font-size: 13px; font-weight: 600;" id="navUserBadge">Rodrigo García (ON-Dealer)</span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="tabs-header" id="dynamicTabsRow">
+            <button class="tab-link active dealer-tab" onclick="activateInternalTab('kpi-concesionario', this)" id="tabLnkVehState">DEALER HEALTH KPIS</button>
+            <button class="tab-link dealer-tab" onclick="activateInternalTab('matriz-asignacion', this)" id="tabLnk360">INVENTORY ALLOCATION MATRIX</button>
+            <button class="tab-link dealer-tab" onclick="activateInternalTab('fondos-mdf', this)" id="tabLnkServices">CO-OP MARKETING FUNDS (MDF)</button>
+            <button class="tab-link dealer-tab" onclick="activateInternalTab('tiers-concesionarios', this)" id="tabLnkShowroom">FRANCHISE TIER STANDARDS</button>
+            
+            <button class="tab-link hq-tab" style="display:none;" onclick="activateInternalTab('hq-network-performance', this)" id="tabLnkDealers">NATIONAL DISTRIBUTION MATRIX</button>
+            <button class="tab-link hq-tab" style="display:none;" onclick="activateInternalTab('hq-predictive-allocation', this)" id="tabLnkPredictive">AI RISK ALLOCATION MODELLING</button>
+        </div>
+
+        <main class="main-content">
+            
+            <div id="kpi-concesionario" class="view-panel active">
+                <div class="dashboard-grid">
+                    <div>
+                        <div class="card">
+                            <h3 class="card-title" id="lblCardTelem">CRITICAL OPERATIONAL FRANCHISE PERFORMANCE</h3>
+                            
+                            <div class="telemetry-row">
+                                <div class="telemetry-meta">
+                                    <span class="telemetry-label" id="lblTelemOil">SALES TEAM CERTIFICATION RATIO (EV/AMG MASTER)</span>
+                                    <span class="telemetry-value" id="valTelemOil" style="color:var(--nordic-blue)">91% (COMPLIANT)</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="barTelemOil" style="width: 91%; background: var(--nordic-blue);"></div>
+                                </div>
+                            </div>
+
+                            <div class="telemetry-row">
+                                <div class="telemetry-meta">
+                                    <span class="telemetry-label" id="lblTelemBrakes">SERVICE BAY WORKLOAD LATENCY COEFFICIENT</span>
+                                    <span class="telemetry-value" id="valTelemBrakes" style="color:var(--accent-red)">88% (BOTTLENECK RISK)</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="barTelemBrakes" style="width: 88%; background: var(--accent-red);"></div>
+                                </div>
+                            </div>
+
+                            <div class="telemetry-row">
+                                <div class="telemetry-meta">
+                                    <span class="telemetry-label" id="lblTelemBattery">WARRANTY CLAIMS DATA INTEGRITY SYNC SPEED</span>
+                                    <span class="telemetry-value" id="valTelemBattery" style="color:var(--accent-green)">99% (OPTIMAL PIPELINE)</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="barTelemBattery" style="width: 99%; background: var(--accent-green);"></div>
+                                </div>
+                            </div>
+
+                            <div class="privacy-banner">
+                                <div class="privacy-info">
+                                    <span class="privacy-title" id="lblPrivTitle">Anonymize Local Franchise Employee Data Streams</span>
+                                    <span class="privacy-desc" id="lblPrivDesc">Enforce secure masking layers matching strict provincial parameters (Quebec Law 25 / PIPEDA).</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="chkAnonymize" onchange="toggleTelemetryPrivacy(this.checked)">
+                                    <span class="slider-round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card" style="height: calc(100% - 30px);">
+                            <h3 class="card-title" id="lblCardUrgent">AUTOMATED RE-ALLOCATION CORE</h3>
+                            <p style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:20px;" id="lblUrgentDesc">
+                                AI has detected extreme inventory backlog of luxury ICE Sedans in Western Canadian nodes. System proposes automated redistribution toward high-demand Ontario clusters.
+                            </p>
+                            <button class="btn-action" onclick="triggerAutoAppointment()" id="btnSecureAppoint">CONFIRM AUTOMATED INVENTORY SWAP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="matriz-asignacion" class="view-panel">
+                <div class="dashboard-grid">
+                    <div>
+                        <div class="visualizer-container">
+                            <div class="stage-360">
+                                <div class="visualizer-overlay-hud">
+                                    MERCEDES-BENZ CANADA SUPPLY CHAIN FORWARDER v2.8<br>
+                                    ACTIVE SUITE: REAL-TIME DEALERSHIP STOCK ASSIGNMENT<br>
+                                    PIPELINE STATUS: CONNECTED SECURE TO GERMANY/TORONTO<br>
+                                    SECTOR VIEW: DISTRIBUTION MAP CONTROL
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1618843479619-f93a9825b290?auto=format&fit=crop&q=80&w=1200" id="main360CarView" class="allocation-map-display" alt="Mercedes Inventory Logistics Staging">
+                                
+                                <div class="rotation-controls">
+                                    <button class="angle-btn active" onclick="renderVehicleAngle('ontario', this)" id="btnAngFront">Ontario</button>
+                                    <button class="angle-btn" onclick="renderVehicleAngle('quebec', this)" id="btnAngProfile">Quebec</button>
+                                    <button class="angle-btn" onclick="renderVehicleAngle('western', this)" id="btnAngRear">Western</button>
+                                    <button class="angle-btn" onclick="renderVehicleAngle('atlantic', this)" id="btnAngInterior">Atlantic</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card" style="height: calc(100% - 30px); margin-bottom:0;">
+                            <h3 class="card-title" id="lblCardEngineArch">REGIONAL HUB STOCK SPECS</h3>
+                            <div class="specs-grid">
+                                <div class="spec-item">
+                                    <div class="spec-label" id="lblSpecModel">TARGET HUB REALM</div>
+                                    <div class="spec-value" id="valTargetHub">Ontario Cluster Node</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-label" id="lblSpecConfig">ALLOCATED ELECTRIC ARCHITECTURES (EQ SERIES)</div>
+                                    <div class="spec-value" id="valSpecConfig">145 Units Preserved</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-label" id="lblSpecOutput">HIGH PERFORMANCE PERFORMANCE INDUCTION (AMG MASTER)</div>
+                                    <div class="spec-value">38 Units Active Transit</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-label" id="lblSpecTorque">COMMERCIAL LOGISTICS FLEET (SPRINTER VOLUMES)</div>
+                                    <div class="spec-value">62 Units Staged</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-label" id="lblSpecDisp">PORT HOLD STABILITY MATRIX</div>
+                                    <div class="spec-value">Halifax Transit Core</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-label" id="lblSpecDrivetrain">DAYS-SUPPLY TURNOVER MEDIAN</div>
+                                    <div class="spec-value">22 Days Pipeline Vel.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fondos-mdf" class="view-panel">
+                <div class="dashboard-grid">
+                    <div>
+                        <div class="card">
+                            <h3 class="card-title" id="lblCardMaintenance">CO-OP MARKETING DEVELOPMENT FUND (MDF) REVENUE ALLOCATION</h3>
+                            <div class="checklist-group">
+                                <label class="checklist-item" onclick="recalculateCostMatrix()">
+                                    <div class="checklist-left">
+                                        <input type="checkbox" checked class="checklist-checkbox" value="15000" data-tax="1950">
+                                        <span class="checklist-name" id="chkNameBrakes">Tier-3 Localized Digital Performance Target Marketing Package</span>
+                                    </div>
+                                    <span class="checklist-cost">$15,000.00 CAD</span>
+                                </label>
+                                <label class="checklist-item" onclick="recalculateCostMatrix()">
+                                    <div class="checklist-left">
+                                        <input type="checkbox" class="checklist-checkbox" value="32000" data-tax="4160">
+                                        <span class="checklist-name" id="chkNameOil">Winter Drive Experiential Staging Showroom Assets & Displays</span>
+                                    </div>
+                                    <span class="checklist-cost">$32,000.00 CAD</span>
+                                </label>
+                                <label class="checklist-item" onclick="recalculateCostMatrix()">
+                                    <div class="checklist-left">
+                                        <input type="checkbox" class="checklist-checkbox" value="8500" data-tax="1105">
+                                        <span class="checklist-name" id="chkNameTires">Regional French-Speaking Localized Compliance Radio/Print Collaterals</span>
+                                    </div>
+                                    <span class="checklist-cost">$8,500.00 CAD</span>
+                                </label>
+                                <label class="checklist-item" onclick="recalculateCostMatrix()">
+                                    <div class="checklist-left">
+                                        <input type="checkbox" class="checklist-checkbox" value="45000" data-tax="5850">
+                                        <span class="checklist-name" id="chkNameSoftware">Regional Luxury Private Executive Gala Event Sponsorship Sponsorship</span>
+                                    </div>
+                                    <span class="checklist-cost">$45,000.00 CAD</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card">
+                            <h3 class="card-title" id="lblCardInvoice">MDF CLEARING ESCROW LEDGER DETAILED OVERVIEW</h3>
+                            <div class="estimator-box">
+                                <div class="estimator-row">
+                                    <span id="lblInvoiceSub">NET CO-OP FUND REQUEST REQUESTED:</span>
+                                    <span id="valInvoiceSub">$15,000.00 CAD</span>
+                                </div>
+                                <div class="estimator-row">
+                                    <span id="lblInvoiceTax">ESTIMATED MB CANADA CO-MATCH CONTRIBUTION (13% MATCH):</span>
+                                    <span id="valInvoiceTax">$1,950.00 CAD</span>
+                                </div>
+                                <div class="estimator-row estimator-total">
+                                    <span id="lblInvoiceTotal">TOTAL PROTECTED ESCROW DISBURSEMENT:</span>
+                                    <span id="valInvoiceTotal">$16,950.00 CAD</span>
+                                </div>
+                            </div>
+                            <button class="btn-action" style="margin-top:20px;" onclick="triggerPaymentProcessing()" id="btnAuthorizeEscrow">SUBMIT MDF REVENUE CLEARING DISPATCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tiers-concesionarios" class="view-panel">
+                <div class="card">
+                    <h3 class="card-title" id="lblCardShowroom">MERCEDES-BENZ CANADA FRANCHISE BRANDING COMPLIANCE</h3>
+                    <div class="showroom-grid">
+                        <div class="vehicle-card">
+                            <div class="vehicle-img-box">
+                                <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=600" alt="AMG Performance Center Compliance">
+                            </div>
+                            <div class="vehicle-info">
+                                <span class="vehicle-tag">AMG TIER 1 HUB</span>
+                                <h4 class="vehicle-name">AMG Performance Staging Standard</h4>
+                                <span class="vehicle-price">Audited Compliance: 98.2%</span>
+                            </div>
+                        </div>
+
+                        <div class="vehicle-card">
+                            <div class="vehicle-img-box">
+                                <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=600" alt="Pure EV Showroom Grid">
+                            </div>
+                            <div class="vehicle-info">
+                                <span class="vehicle-tag">MERCEDES-ELECTRIC CORE</span>
+                                <h4 class="vehicle-name">EQ Architecture High-Voltage Infrastructure</h4>
+                                <span class="vehicle-price">DC Fast-Chargers Synced: 55/55</span>
+                            </div>
+                        </div>
+
+                        <div class="vehicle-card">
+                            <div class="vehicle-img-box">
+                                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=600" alt="Corporate Showroom Floor Elements">
+                            </div>
+                            <div class="vehicle-info">
+                                <span class="vehicle-tag">LUXURY BOUTIQUE SPACE</span>
+                                <h4 class="vehicle-name">S-Class Atelier Elite Lounge Guidelines</h4>
+                                <span class="vehicle-price">Mandatory Spatial Signage v4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hq-network-performance" class="view-panel">
+                <div class="metric-matrix">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span id="lblMetActiveDealers">Total Network Dealerships Synced</span>
+                            <span class="metric-trend up">HEALTHY INTEGRATION</span>
+                        </div>
+                        <div class="metric-main-value">55 Dealers</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span id="lblMetNetRevenue">National Integrated Wholesale Flow</span>
+                            <span class="metric-trend up">+18.7% Year-to-Date</span>
+                        </div>
+                        <div class="metric-main-value">$142.8M CAD</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span id="lblMetPRMShare">PRM Endpoint Data Connection Rate</span>
+                            <span class="metric-trend up">100% Core Online</span>
+                        </div>
+                        <div class="metric-main-value">55 / 55 Nodes</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title" id="lblCardDealersTable">NATIONAL NETWORK LOGISTICS FRANCHISE INTERFACE CONTROL</h3>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th id="thDealerID">Concessionaire ID / Anchor</th>
+                                    <th id="thDealerRegion">Geographic Territory</th>
+                                    <th id="thDealerSync">MDF Utilization Rate</th>
+                                    <th id="thDealerRev">Wholesale Volume Value</th>
+                                    <th id="thDealerStatus">Operational Mode Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>MB Toronto Downtown Core</td>
+                                    <td>Ontario (ON)</td>
+                                    <td>94% Disbursed</td>
+                                    <td>$24,500,000 CAD</td>
+                                    <td><span class="status-pill success">PLATINUM LEVEL</span></td>
+                                </tr>
+                                <tr>
+                                    <td>MB Vancouver Luxury Corporate</td>
+                                    <td>British Columbia (BC)</td>
+                                    <td>82% Disbursed</td>
+                                    <td>$19,800,000 CAD</td>
+                                    <td><span class="status-pill success">PLATINUM LEVEL</span></td>
+                                </tr>
+                                <tr>
+                                    <td>MB Montreal Elite Fleet Center</td>
+                                    <td>Quebec (QC)</td>
+                                    <td>100% Fully Utilized</td>
+                                    <td>$16,500,000 CAD</td>
+                                    <td><span class="status-pill success">GOLD COMPLIANT</span></td>
+                                </tr>
+                                <tr>
+                                    <td>MB Calgary Plains Distribution</td>
+                                    <td>Alberta (AB)</td>
+                                    <td>41% Underutilized</td>
+                                    <td>$9,200,000 CAD</td>
+                                    <td><span class="status-pill warning">ALLOCATION WARNING</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hq-predictive-allocation" class="view-panel">
+                <div class="dashboard-grid">
+                    <div>
+                        <div class="card">
+                            <h3 class="card-title" id="lblCardChurn">COGNITIVE STOCK OUT MATRIX & ALLOCATION SURGE VALUE AT RISK</h3>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th id="thChurnClient">Franchise Node Location</th>
+                                            <th id="thChurnModel">High-Velocity Stock Asset</th>
+                                            <th id="thChurnRisk">Calculated Allocation Supply Interruption Threat</th>
+                                            <th id="thChurnLTV">Value At Operational Risk Weight</th>
+                                            <th id="thChurnAction">Automated Optimization Correction Recommendation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>MB Toronto Downtown Core</td>
+                                            <td>AMG GT Series / EQE SUV</td>
+                                            <td style="color:var(--accent-green); font-weight:700;">2.1% (Stable Stock Flows)</td>
+                                            <td>$4,500,000 CAD</td>
+                                            <td>Maintain Baseline Priority Allocation Stream Rules</td>
+                                        </tr>
+                                        <tr>
+                                            <td>MB Calgary Plains Distribution</td>
+                                            <td>Sprinter Logistics Commercial Vans</td>
+                                            <td style="color:var(--accent-orange); font-weight:700;">44.8% (Medium Shortage Threat)</td>
+                                            <td>$12,250,000 CAD</td>
+                                            <td>Reroute Vancouver Port Backlog Automatically to Alberta Node</td>
+                                        </tr>
+                                        <tr>
+                                            <td>MB Quebec City Inter-Boreal Hub</td>
+                                            <td>4MATIC Cold-Weather Utility Architecture</td>
+                                            <td style="color:var(--accent-red); font-weight:700;">81.3% (Critical Supply Collapse Risk)</td>
+                                            <td>$6,490,000 CAD</td>
+                                            <td>Inject Immediate Strategic Allocation Transfer from Core Toronto Reserve</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card" style="height: calc(100% - 30px); margin-bottom:0;">
+                            <h3 class="card-title" id="lblCardAiLogs">CRITICAL PLATFORM AI TRANSACTIONARY LOGS</h3>
+                            <div class="ai-log-container" id="aiLogsDashboardBlock">
+                                <div class="ai-log-card">
+                                    <div class="ai-log-meta">
+                                        <span>SUPPLY REBALANCER</span>
+                                        <span>JUST NOW</span>
+                                    </div>
+                                    <div class="ai-log-text">
+                                        National warehouse stock metrics evaluated for Ontario Dealer Node Cluster. Supply adjustment processed and mapped to pipeline dashboards.
+                                    </div>
+                                </div>
+                                <div class="ai-log-card">
+                                    <div class="ai-log-meta">
+                                        <span>REGULATORY MASKING ENGINE</span>
+                                        <span>4 MINS AGO</span>
+                                    </div>
+                                    <div class="ai-log-text">
+                                        Franchise financial packet compiled for Montreal Elite Hub. Applied strict Bill 25 secure structural hashing protocols to dealer payroll arrays.
+                                    </div>
+                                </div>
+                                <div class="ai-log-card">
+                                    <div class="ai-log-meta">
+                                        <span>MDF CLEARING INTELLIGENCE</span>
+                                        <span>12 MINS AGO</span>
+                                    </div>
+                                    <div class="ai-log-text">
+                                        Forecasting pipeline ran across 55 corporate ledger nodes. Verification baseline score settled cleanly at 98.4% target efficiency parameter.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin: 40px 0 30px 0;">
+            
+            <div class="card" style="background: rgba(10, 12, 16, 0.5);">
+                <h4 class="laudon-matrix-title" id="lblLaudonHeader">LAUDON & LAUDON PRM STRATEGIC SYSTEM MAP: FRANCHISE MEDIATING FACTORS (FIGURE 3.1)</h4>
+                <div class="laudon-grid">
+                    <div class="laudon-factor-card">
+                        <div class="factor-header" id="fHeaderEntorno">ENTORNO (ENVIRONMENT)</div>
+                        <div class="factor-body" id="fBodyEntorno">Mutes severe Canadian weather interruptions across the supply chain. Converts rail freight track bottlenecks directly into automated stock re-routing maneuvers.</div>
+                    </div>
+                    <div class="laudon-factor-card">
+                        <div class="factor-header" id="fHeaderCultura">CULTURA (ORGANIZATIONAL CULTURE)</div>
+                        <div class="factor-body" id="fBodyCultura">Sustains pristine Mercedes luxury expectations across independent dealership entities. Replaces traditional friction-heavy ordering emails with unified corporate transparent dashboards.</div>
+                    </div>
+                    <div class="laudon-factor-card">
+                        <div class="factor-header" id="fHeaderEstructura">ESTRUCTURA (STRUCTURE)</div>
+                        <div class="factor-body" id="fBodyEstructura">Binds 55 completely autonomous multi-owner franchises under a secure, integrated corporate node cluster network. Standardizes strict compliance without eroding independent ownership business focus.</div>
+                    </div>
+                    <div class="laudon-factor-card">
+                        <div class="factor-header" id="fProcesos">PROCESOS DE NEGOCIO (BUSINESS PROCESSES)</div>
+                        <div class="factor-body" id="fBodyProcesos">Replaces legacy allocation requests with dynamic automated inventory allocations. Connects current dealer sales performance speeds to global manufacturing plants directly.</div>
+                    </div>
+                    <div class="laudon-factor-card">
+                        <div class="factor-header" id="fHeaderPoliticas">POLÍTICAS (POLITICS/POLICIES)</div>
+                        <div class="factor-body" id="fBodyPoliticas">Mediates corporate-franchisee friction over vehicle allotments. Guarantees absolute fairness in allocation algorithms and ensures local operational compliance with Bill 25 data protection laws.</div>
+                    </div>
+                    <div class="laudon-factor-card">
+                        <div class="factor-header" id="fHeaderDecisiones">DECISIONES GERENCIALES (MANAGEMENT DECISIONS)</div>
+                        <div class="factor-body" id="fBodyDecisiones">Eliminates reactive supply adjustments. Equips executives with real-time MDF performance metrics and predictive regional inventory depletion models.</div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const AppState = {
+            currentDomain: 'dealer', // Options: 'dealer' | 'hq'
+            currentLanguage: 'es',   // Options: 'es' | 'en' | 'fr'
+            activeHubView: 'ontario',
+            isAuthenticated: false
+        };
+
+        const Lexicon = {
+            es: {
+                loginTitle: "Mercedes-Benz Canada",
+                loginSubtitle: "Portal de Gestión de Socios Comerciales (PRM)",
+                userField: "ID de Concesionario / Email Corporativo",
+                passField: "Clave de Acceso Seguro de Red",
+                remember: "Mantener enlace seguro activo",
+                forgot: "Recuperar Token de Acceso",
+                submitAccess: "ESTABLECER CONEXIÓN CIFRADA",
+                biometric: "Acceder mediante Identificación Corporativa",
+                tabVehState: "KPIs DE SALUD DE LA AGENCIA",
+                tab360: "MATRIZ DE ASIGNACIÓN DE INVENTARIO",
+                tabServices: "FONDOS CO-OP DE MARKETING (MDF)",
+                tabShowroom: "ESTÁNDARES DE CUMPLIMIENTO CORPORATIVO",
+                tabDealers: "MATRIZ DE DISTRIBUCIÓN NACIONAL",
+                tabPredictive: "MODELADO DE RIESGO POR IA",
+                cardTelem: "RENDIMIENTO OPERATIVO CRÍTICO DE LA FRANQUICIA",
+                telemOil: "RATIO DE CERTIFICACIÓN DE ASESORES (EV/AMG MASTER)",
+                telemBrakes: "COEFICIENTE DE LATENCIA EN TALLERES (SOBRECARGA)",
+                telemBattery: "VELOCIDAD DE SINCRONIZACIÓN DE RECLAMOS DE GARANTÍA",
+                privTitle: "Anonimizar Flujo de Datos del Personal Local",
+                privDesc: "Aplica capas estrictas de enmascaramiento alineadas con la Ley 25 de Quebec y PIPEDA.",
+                cardUrgent: "NÚCLEO DE REASIGNACIÓN AUTOMATIZADA",
+                urgentDesc: "La IA detectó un exceso de stock de sedanes ICE en el oeste de Canadá. El sistema propone una redistribución automatizada hacia los nodos de alta demanda en Ontario.",
+                secureAppoint: "CONFIRMAR TRANSFERENCIA LOGÍSTICA DE STOCK",
+                cardEngineArch: "ESPECIFICACIONES DE LOGÍSTICA EN HUBS",
+                specModel: "REALM DEL HUB OBJETIVO",
+                specConfig: "ARQUITECTURAS ELÉCTRICAS ASIGNADAS (EQ)",
+                specOutput: "VEHÍCULOS DE ALTO RENDIMIENTO (AMG IN TRANSIT)",
+                specTorque: "FLOTA COMERCIAL LOGÍSTICA (SPRINTER)",
+                specDisp: "MATRIZ DE ESTABILIDAD EN PUERTOS",
+                specDrivetrain: "MEDIANA DE ROTACIÓN DE INVENTARIO (DAYS-SUPPLY)",
+                cardMaintenance: "ASIGNACIÓN DE REVENUE DE FONDOS DE MARKETING (MDF)",
+                chkNameBrakes: "Paquete de Marketing Digital de Rendimiento Local (Tier-3)",
+                chkNameOil: "Displays y Activos de Exhibición para Campaña de Invierno",
+                chkNameTires: "Colaterales de Radio y Prensa Localizados en Francés (Cumplimiento Quebec)",
+                chkNameSoftware: "Patrocinio de Gala Ejecutiva de Lujo y Evento de Relaciones Públicas",
+                cardInvoice: "ESTADO DE CUENTA Y REGISTRO EN CUSTODIA (MDF LEDGER)",
+                invoiceSub: "REQUERIMIENTO NETO DE FONDOS CO-OP:",
+                invoiceTax: "CONTRIBUCIÓN DE CO-MATCH MB CANADA (13% MATCH):",
+                invoiceTotal: "DISBURSEMENT TOTAL DE FONDOS EN CUSTODIA:",
+                authorizeEscrow: "ENVIAR SOLICITUD DE LIBERACIÓN DE FONDOS MDF",
+                cardShowroom: "COMPLIANCE DE MARCA EN CONCESIONARIOS MERCEDES-BENZ",
+                metActiveDealers: "Red Global de Concesionarios Sincronizados",
+                metNetRevenue: "Flujo Mayorista Integrado Nacional",
+                metPRMShare: "Tasa de Endpoint Activo PRM",
+                cardDealersTable: "MONITOREO DE RED LOGÍSTICA Y CONCESIONARIOS NACIONALES",
+                thDealerID: "ID Concesionario / Ancla",
+                thDealerRegion: "Territorio Geográfico",
+                thDealerSync: "Tasa de Utilización de MDF",
+                thDealerRev: "Volumen de Compra Mayorista (Wholesale)",
+                thDealerStatus: "Estado del Nivel Operativo (Tier)",
+                cardChurn: "MATRIZ COGNITIVA DE DESABASTO Y VALOR DE ASIGNACIÓN EN RIESGO",
+                thChurnClient: "Ubicación del Nodo de Franquicia",
+                thChurnModel: "Activo de Stock de Alta Velocidad",
+                thChurnRisk: "Riesgo Calculado de Interrupción de Suministro",
+                thChurnLTV: "Peso del Valor de Operación en Riesgo",
+                thChurnAction: "Recomendación Automatizada de Corrección por IA",
+                cardAiLogs: "LOGS TRANSACCIONALES CRÍTICOS DE LA INTELIGENCIA ARTIFICIAL",
+                laudonHeader: "MAPA DE ALINEACIÓN SISTÉMICA PRM: FACTORES MEDIADORES DE FRANQUICIA (LAUDON FIGURA 3.1)"
+            },
+            en: {
+                loginTitle: "Mercedes-Benz Canada",
+                loginSubtitle: "Partner Relationship Management (PRM) Hub",
+                userField: "Franchise Partner ID / Email",
+                passField: "Secure Gate Key",
+                remember: "Keep secure handshake active",
+                forgot: "Recover Key Token",
+                submitAccess: "ESTABLISH ENCRYPTED GATEWAY",
+                biometric: "Pass via Corporate Security ID",
+                tabVehState: "DEALER HEALTH KPIS",
+                tab360: "INVENTORY ALLOCATION MATRIX",
+                tabServices: "CO-OP MARKETING FUNDS (MDF)",
+                tabShowroom: "FRANCHISE TIER STANDARDS",
+                tabDealers: "NATIONAL DISTRIBUTION MATRIX",
+                tabPredictive: "AI RISK ALLOCATION MODELLING",
+                cardTelem: "CRITICAL OPERATIONAL FRANCHISE PERFORMANCE",
+                telemOil: "SALES TEAM CERTIFICATION RATIO (EV/AMG MASTER)",
+                telemBrakes: "SERVICE BAY WORKLOAD LATENCY COEFFICIENT",
+                telemBattery: "WARRANTY CLAIMS DATA INTEGRITY SYNC SPEED",
+                privTitle: "Anonymize Local Franchise Employee Data Streams",
+                privDesc: "Enforce secure masking layers matching strict provincial parameters (Quebec Law 25 / PIPEDA).",
+                cardUrgent: "AUTOMATED RE-ALLOCATION CORE",
+                urgentDesc: "AI has detected extreme inventory backlog of luxury ICE Sedans in Western Canadian nodes. System proposes automated redistribution toward high-demand Ontario clusters.",
+                secureAppoint: "CONFIRMAR TRANSFERENCIA LOGÍSTICA DE STOCK",
+                cardEngineArch: "REGIONAL HUB STOCK SPECS",
+                specModel: "TARGET HUB REALM",
+                specConfig: "ALLOCATED ELECTRIC ARCHITECTURES (EQ SERIES)",
+                specOutput: "HIGH PERFORMANCE PERFORMANCE INDUCTION (AMG MASTER)",
+                specTorque: "COMMERCIAL LOGISTICS FLEET (SPRINTER VOLUMES)",
+                specDisp: "PORT HOLD STABILITY MATRIX",
+                specDrivetrain: "DAYS-SUPPLY TURNOVER MEDIAN",
+                cardMaintenance: "CO-OP MARKETING DEVELOPMENT FUND (MDF) REVENUE ALLOCATION",
+                chkNameBrakes: "Tier-3 Localized Digital Performance Target Marketing Package",
+                chkNameOil: "Winter Drive Experiential Staging Showroom Assets & Displays",
+                chkNameTires: "Regional French-Speaking Localized Compliance Radio/Print Collaterals",
+                chkNameSoftware: "Regional Luxury Private Executive Gala Event Sponsorship Sponsorship",
+                cardInvoice: "MDF CLEARING ESCROW LEDGER DETAILED OVERVIEW",
+                invoiceSub: "NET CO-OP FUND REQUEST REQUESTED:",
+                invoiceTax: "ESTIMATED MB CANADA CO-MATCH CONTRIBUTION (13% MATCH):",
+                invoiceTotal: "TOTAL PROTECTED ESCROW DISBURSEMENT:",
+                authorizeEscrow: "SUBMIT MDF REVENUE CLEARING DISPATCH",
+                cardShowroom: "MERCEDES-BENZ CANADA FRANCHISE BRANDING COMPLIANCE",
+                metActiveDealers: "Total Network Dealerships Synced",
+                metNetRevenue: "National Integrated Wholesale Flow",
+                metPRMShare: "PRM Endpoint Data Connection Rate",
+                cardDealersTable: "NATIONAL NETWORK LOGISTICS FRANCHISE INTERFACE CONTROL",
+                thDealerID: "Concessionaire ID / Anchor",
+                thDealerRegion: "Geographic Territory",
+                thDealerSync: "MDF Utilization Rate",
+                thDealerRev: "Wholesale Volume Value",
+                thDealerStatus: "Operational Mode Status",
+                cardChurn: "COGNITIVE STOCK OUT MATRIX & ALLOCATION SURGE VALUE AT RISK",
+                thChurnClient: "Franchise Node Location",
+                thChurnModel: "High-Velocity Stock Asset",
+                thChurnRisk: "Calculated Allocation Supply Interruption Threat",
+                thChurnLTV: "Value At Operational Risk Weight",
+                thChurnAction: "Automated Optimization Correction Recommendation",
+                cardAiLogs: "CRITICAL PLATFORM AI TRANSACTIONARY LOGS",
+                laudonHeader: "LAUDON & LAUDON PRM STRATEGIC SYSTEM MAP: FRANCHISE MEDIATING FACTORS (FIGURE 3.1)"
+            },
+            fr: {
+                loginTitle: "Mercedes-Benz Canada",
+                loginSubtitle: "Portail de Gestion des Partenaires (PRM)",
+                userField: "ID Partenaire / Email Corporatif",
+                passField: "Clé de Sécurité Réseau",
+                remember: "Garder la liaison sécurisée active",
+                forgot: "Récupérer le Token d'Accès",
+                submitAccess: "ÉTABLIR UNE CONNEXION CHIFFRÉE",
+                biometric: "Passer par l'Identifiant Corporatif",
+                tabVehState: "KPI DE SANTÉ DE L'AGENCE",
+                tab360: "MATRICE D'ALLOCATION DES STOCKS",
+                tabServices: "FONDS DE MARKETING CO-OP (MDF)",
+                tabShowroom: "NORMES DE CONFORMITÉ DES FRANCHISES",
+                tabDealers: "MATRICE DE DISTRIBUTION NATIONALE",
+                tabPredictive: "MODÉLISATION DES RISQUES PAR IA",
+                cardTelem: "PERFORMANCE OPÉRATIONNELLE CRITIQUE",
+                telemOil: "TAUX DE CERTIFICATION DES CONSEILLERS (EV/AMG)",
+                telemBrakes: "LATENCE DE CHARGE DE TRAVAIL DES ATELIERS",
+                telemBattery: "VITESSE DE SYNCHRO DES RÉCLAMATIONS DE GARANTIE",
+                privTitle: "Anonymiser les Données des Employés Locaux",
+                privDesc: "Applique des couches strictes de masquage conformes à la loi 25 du Québec et PIPEDA.",
+                cardUrgent: "NOYAU DE RÉALLOCATION AUTOMATISÉ",
+                urgentDesc: "L'IA a détecté un surplus de berlines ICE dans l'Ouest. Le système propose une redistribution automatisée vers l'Ontario à forte demande.",
+                secureAppoint: "CONFIRMER LE TRANSFERT LOGISTIQUE DES STOCKS",
+                cardEngineArch: "SPÉCIFICATIONS LOGISTIQUES DES HUBS",
+                specModel: "DOMAINE DU HUB CIBLE",
+                specConfig: "ARCHITECTURES ÉLECTRIQUES ALLOUÉES (EQ)",
+                specOutput: "VÉHICULES HAUTE PERFORMANCE EN TRANSIT (AMG)",
+                specTorque: "FLOTTE COMMERCIALE LOGISTIQUE (SPRINTER)",
+                specDisp: "MATRICE DE STABILITÉ DES PORTS",
+                specDrivetrain: "MÉDIANE DE ROTATION DES STOCKS (DAYS-SUPPLY)",
+                cardMaintenance: "ALLOCATION DES REVENUS DU FONDS DE MARKETING (MDF)",
+                chkNameBrakes: "Forfait Marketing Digital de Performance Locale (Tier-3)",
+                chkNameOil: "Présentoirs et Actifs de Campagne d'Hiver pour Salle d'Exposition",
+                chkNameTires: "Supports Radio/Presse Localisés en Français (Loi 101/25)",
+                chkNameSoftware: "Parrainage de Gala Exécutif de Luxe et Événement de RP",
+                cardInvoice: "APERÇU DU GRAND LIVRE COMPTABLE MDF",
+                invoiceSub: "DEMANDE NETTE DE FONDS CO-OP:",
+                invoiceTax: "CONTRIBUTION DE CO-MATCH MB CANADA (13% MATCH):",
+                invoiceTotal: "VERSEMENT TOTAL DU COMPTE TIERS:",
+                authorizeEscrow: "SOUMETTRE LA DEMANDE DE LIBÉRATION DE FONDS MDF",
+                cardShowroom: "CONFORMITÉ DE MARQUE CONCESSIONNAIRE MERCEDES-BENZ",
+                metActiveDealers: "Réseau Total des Concessionnaires Synchronisés",
+                metNetRevenue: "Flux National de Vente en Gros Intégré",
+                metPRMShare: "Taux de Connexion des Points d'Accès PRM",
+                cardDealersTable: "PANNEAU DE CONTRÔLE LOGISTIQUE DU RÉSEAU NATIONAL",
+                thDealerID: "ID Concessionnaire / Ancre",
+                thDealerRegion: "Territoire Géographique",
+                thDealerSync: "Taux d'Utilisation des MDF",
+                thDealerRev: "Valeur du Volume de Vente en Gros",
+                thDealerStatus: "Statut du Niveau Opérationnel (Tier)",
+                cardChurn: "MATRICE COGNITIVE DES RUPTURES DE STOCK ET VALEUR EN RISQUE",
+                thChurnClient: "Emplacement du Nœud de Franchise",
+                thChurnModel: "Actif de Stock à Haute Vélocité",
+                thChurnRisk: "Risque Calculé de Rupture d'Approvisionnement",
+                thChurnLTV: "Poids de la Valeur d'Exploitation en Risque",
+                thChurnAction: "Recommandation d'Optimisation Automatisée par l'IA",
+                cardAiLogs: "LOGS TRANSACTIONNELS CRITIQUES DE L'INTELLIGENCE ARTIFICIELLE",
+                laudonHeader: "CARTE DE CONFIGURATION STRATÉGIQUE PRM: FACTEURS FRANCHISÉS (FIGURE 3.1)"
+            }
+        };
+
+        function evaluatePassSecurity(val) {
+            const bar = document.getElementById('passStrengthBar');
+            const placeholder = document.getElementById('passStrengthRow');
+            if(val.length === 0) { placeholder.style.display = 'none'; return; }
+            placeholder.style.display = 'block';
+            let score = 0;
+            if(val.length >= 6) score += 30;
+            if(/[A-Z]/.test(val)) score += 35;
+            if(/[0-9]/.test(val)) score += 35;
+
+            bar.style.width = score + '%';
+            if(score <= 30) bar.style.background = 'var(--accent-red)';
+            else if(score <= 65) bar.style.background = 'var(--accent-orange)';
+            else bar.style.background = 'var(--accent-green)';
+        }
+
+        function handleSecureLogin(e) {
+            e.preventDefault();
+            const loader = document.getElementById('hudLoader');
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                AppState.isAuthenticated = true;
+                loader.style.display = 'none';
+                
+                const portal = document.getElementById('loginPortal');
+                const app = document.getElementById('app-container');
+                portal.style.opacity = '0';
+                portal.style.transform = 'scale(0.98)';
+                
+                setTimeout(() => {
+                    portal.style.display = 'none';
+                    app.style.display = 'block';
+                    setTimeout(() => app.style.opacity = '1', 50);
+                    recalculateCostMatrix();
+                }, 400);
+            }, 1500);
+        }
+
+        function simulateBiometricPass() {
+            document.getElementById('txtUsername').value = "rodrigo.garcia@toronto-mercedes.ca";
+            document.getElementById('txtPassword').value = "CorporateKeyIPN2026";
+            evaluatePassSecurity("CorporateKeyIPN2026");
+            document.getElementById('frmAuthentication').dispatchEvent(new Event('submit'));
+        }
+
+        function switchDomainExperience(domain) {
+            if(domain === AppState.currentDomain) return;
+            AppState.currentDomain = domain;
+
+            const bClient = document.getElementById('btnExpClient');
+            const bBiz = document.getElementById('btnExpBusiness');
+            const cTabs = document.querySelectorAll('.dealer-tab');
+            const bTabs = document.querySelectorAll('.hq-tab');
+            const allPanels = document.querySelectorAll('.view-panel');
+
+            allPanels.forEach(p => p.classList.remove('active'));
+
+            if(domain === 'dealer') {
+                bClient.classList.add('active');
+                bBiz.classList.remove('active');
+                bTabs.forEach(t => t.style.display = 'none');
+                cTabs.forEach(t => t.style.display = 'block');
+                
+                document.getElementById('kpi-concesionario').classList.add('active');
+                setActiveTabClass(document.getElementById('tabLnkVehState'));
+            } else {
+                bBiz.classList.add('active');
+                bClient.classList.remove('active');
+                cTabs.forEach(t => t.style.display = 'none');
+                bTabs.forEach(t => t.style.display = 'block');
+                
+                document.getElementById('hq-network-performance').classList.add('active');
+                setActiveTabClass(document.getElementById('tabLnkDealers'));
+            }
+        }
+
+        function setActiveTabClass(activeEl) {
+            document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
+            activeEl.classList.add('active');
+        }
+
+        function activateInternalTab(panelId, element) {
+            document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(panelId).classList.add('active');
+            setActiveTabClass(element);
+        }
+
+        function renderVehicleAngle(region, buttonEl) {
+            if(region === AppState.activeHubView) return;
+            AppState.activeHubView = region;
+
+            buttonEl.parentElement.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
+            buttonEl.classList.add('active');
+
+            const carDisplay = document.getElementById('main360CarView');
+            carDisplay.classList.add('loading');
+
+            let targetAssetUrl = "";
+            let labelText = "";
+            let configText = "";
+            switch(region) {
+                case 'ontario':
+                    targetAssetUrl = "https://images.unsplash.com/photo-1618843479619-f93a9825b290?auto=format&fit=crop&q=80&w=1200";
+                    labelText = "Ontario Cluster Node";
+                    configText = "145 Units Preserved";
+                    break;
+                case 'quebec':
+                    targetAssetUrl = "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=1200";
+                    labelText = "Quebec Strategic Sector";
+                    configText = "98 Units Preserved (Law 25 Protected)";
+                    break;
+                case 'western':
+                    targetAssetUrl = "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=1200";
+                    labelText = "Western Mountain Hub (BC/AB)";
+                    configText = "210 Units Preserved (4MATIC Dominant)";
+                    break;
+                case 'atlantic':
+                    targetAssetUrl = "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1200";
+                    labelText = "Atlantic Coastal Gateway";
+                    configText = "45 Units Staged at Port Hold";
+                    break;
+            }
+
+            setTimeout(() => {
+                carDisplay.src = targetAssetUrl;
+                document.getElementById('valTargetHub').innerText = labelText;
+                document.getElementById('valSpecConfig').innerText = configText;
+                carDisplay.classList.remove('loading');
+            }, 350);
+        }
+
+        function recalculateCostMatrix() {
+            let subtotal = 0;
+            let coMatch = 0;
+            
+            document.querySelectorAll('.checklist-checkbox').forEach(box => {
+                if(box.checked) {
+                    subtotal += parseFloat(box.value);
+                    coMatch += parseFloat(box.getAttribute('data-tax'));
+                }
+            });
+
+            let total = subtotal + coMatch;
+
+            document.getElementById('valInvoiceSub').innerText = `$${subtotal.toLocaleString('en-US', {minimumFractionDigits: 2})} CAD`;
+            document.getElementById('valInvoiceTax').innerText = `$${coMatch.toLocaleString('en-US', {minimumFractionDigits: 2})} CAD`;
+            document.getElementById('valInvoiceTotal').innerText = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})} CAD`;
+        }
+
+        function logCognitiveEvent(origin, message) {
+            const container = document.getElementById('aiLogsDashboardBlock');
+            const card = document.createElement('div');
+            card.className = 'ai-log-card';
+            card.innerHTML = `
+                <div class="ai-log-meta">
+                    <span>${origin.toUpperCase()}</span>
+                    <span>JUST NOW</span>
+                </div>
+                <div class="ai-log-text">${message}</div>
+            `;
+            container.insertBefore(card, container.firstChild);
+        }
+
+        function triggerAutoAppointment() {
+            alert("SUCCESS: Automated Stock-Swap authorized. Manifest pushed directly to Canadian National Railway routing networks.");
+            logCognitiveEvent("LOGISTICS CORE", "Cross-regional fleet units balance signed off for dealer node ID: 44211.");
+        }
+
+        function triggerPaymentProcessing() {
+            alert("AUTHENTICATED: Co-Op MDF Request submitted to Toronto HQ Clearing House. Escrow verified.");
+            logCognitiveEvent("MDF ESCROW TRANSACTION", "Ledger request logged into wholesale compliance stack.");
+        }
+
+        function toggleTelemetryPrivacy(isActive) {
+            if(isActive) {
+                alert("PRIVACY MODE ENFORCED: Personal dealer worker data masked under Bill 25 / PIPEDA constraints.");
+                logCognitiveEvent("COMPLIANCE POLICIES", "Anonymization layer activated for active dealer portal endpoints.");
+            } else {
+                logCognitiveEvent("COMPLIANCE POLICIES", "Anonymization removed. Standard corporate metrics telemetry restored.");
+            }
+        }
+
+        function triggerLanguageSwitch(lang) {
+            if(lang === AppState.currentLanguage) return;
+            AppState.currentLanguage = lang;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            const dic = Lexicon[lang];
+
+            document.getElementById('lblLoginTitle').innerText = dic.loginTitle;
+            document.getElementById('lblLoginSubtitle').innerText = dic.loginSubtitle;
+            document.getElementById('lblUserField').innerText = dic.userField;
+            document.getElementById('lblPassField').innerText = dic.passField;
+            document.getElementById('lblRemember').innerText = dic.remember;
+            document.getElementById('lblForgot').innerText = dic.forgot;
+            document.getElementById('btnSubmitAccess').innerText = dic.submitAccess;
+            document.getElementById('lblBiometric').innerText = dic.biometric;
+
+            document.getElementById('tabLnkVehState').innerText = dic.tabVehState;
+            document.getElementById('tabLnk360').innerText = dic.tab360;
+            document.getElementById('tabLnkServices').innerText = dic.tabServices;
+            document.getElementById('tabLnkShowroom').innerText = dic.tabShowroom;
+            document.getElementById('tabLnkDealers').innerText = dic.tabDealers;
+            document.getElementById('tabLnkPredictive').innerText = dic.tabPredictive;
+
+            document.getElementById('lblCardTelem').innerText = dic.cardTelem;
+            document.getElementById('lblTelemOil').innerText = dic.telemOil;
+            document.getElementById('lblTelemBrakes').innerText = dic.telemBrakes;
+            document.getElementById('lblTelemBattery').innerText = dic.telemBattery;
+            document.getElementById('lblPrivTitle').innerText = dic.privTitle;
+            document.getElementById('lblPrivDesc').innerText = dic.privDesc;
+            document.getElementById('lblCardUrgent').innerText = dic.cardUrgent;
+            document.getElementById('lblUrgentDesc').innerText = dic.urgentDesc;
+            document.getElementById('btnSecureAppoint').innerText = dic.secureAppoint;
+
+            document.getElementById('lblCardEngineArch').innerText = dic.cardEngineArch;
+            document.getElementById('lblSpecModel').innerText = dic.specModel;
+            document.getElementById('lblSpecConfig').innerText = dic.specConfig;
+            document.getElementById('lblSpecOutput').innerText = dic.specOutput;
+            document.getElementById('lblSpecTorque').innerText = dic.specTorque;
+            document.getElementById('lblSpecDisp').innerText = dic.specDisp;
+            document.getElementById('lblSpecDrivetrain').innerText = dic.specDrivetrain;
+
+            document.getElementById('lblCardMaintenance').innerText = dic.cardMaintenance;
+            document.getElementById('chkNameBrakes').innerText = dic.chkNameBrakes;
+            document.getElementById('chkNameOil').innerText = dic.chkNameOil;
+            document.getElementById('chkNameTires').innerText = dic.chkNameTires;
+            document.getElementById('chkNameSoftware').innerText = dic.chkNameSoftware;
+            document.getElementById('lblCardInvoice').innerText = dic.cardInvoice;
+            document.getElementById('lblInvoiceSub').innerText = dic.invoiceSub;
+            document.getElementById('lblInvoiceTax').innerText = dic.invoiceTax;
+            document.getElementById('lblInvoiceTotal').innerText = dic.invoiceTotal;
+            document.getElementById('btnAuthorizeEscrow').innerText = dic.authorizeEscrow;
+
+            document.getElementById('lblCardShowroom').innerText = dic.cardShowroom;
+            document.getElementById('lblMetActiveDealers').innerText = dic.metActiveDealers;
+            document.getElementById('lblMetNetRevenue').innerText = dic.metNetRevenue;
+            document.getElementById('lblMetPRMShare').innerText = dic.metPRMShare;
+            document.getElementById('lblCardDealersTable').innerText = dic.cardDealersTable;
+
+            document.getElementById('thDealerID').innerText = dic.thDealerID;
+            document.getElementById('thDealerRegion').innerText = dic.thDealerRegion;
+            document.getElementById('thDealerSync').innerText = dic.thDealerSync;
+            document.getElementById('thDealerRev').innerText = dic.thDealerRev;
+            document.getElementById('thDealerStatus').innerText = dic.thDealerStatus;
+
+            document.getElementById('lblCardChurn').innerText = dic.cardChurn;
+            document.getElementById('thChurnClient').innerText = dic.thChurnClient;
+            document.getElementById('thChurnModel').innerText = dic.thChurnModel;
+            document.getElementById('thChurnRisk').innerText = dic.thChurnRisk;
+            document.getElementById('thChurnLTV').innerText = dic.thChurnLTV;
+            document.getElementById('thChurnAction').innerText = dic.thChurnAction;
+            document.getElementById('lblCardAiLogs').innerText = dic.cardAiLogs;
+            document.getElementById('lblLaudonHeader').innerText = dic.laudonHeader;
+        }
+    </script>
+</body>
+</html>
