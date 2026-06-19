@@ -621,7 +621,7 @@
         <div class="login-card">
             <div class="hud-loader" id="hudLoader">
                 <div class="spinner"></div>
-                <div id="loaderText" style="font-size: 13px; font-weight: 600; color: var(--nordic-blue); font-family: monospace;">INITIALIZING PRM DATA EXCHANGE LINK...</div>
+                <div id="loaderText" style="font-size: 13px; font-weight: 600; color: var(--nordic-blue); font-family: monospace;">INICIALIZANDO ENLACE DE DATOS PRM...</div>
             </div>
 
             <div class="login-logo">
@@ -631,15 +631,15 @@
                 </svg>
             </div>
             <h2 class="login-title" id="lblLoginTitle">Mercedes-Benz Canada</h2>
-            <p class="login-subtitle" id="lblLoginSubtitle">Partner Relationship Management (PRM) Hub</p>
+            <p class="login-subtitle" id="lblLoginSubtitle">Portal de Gestión de Socios (PRM)</p>
 
             <form id="frmAuthentication" onsubmit="handleSecureLogin(event)">
                 <div class="form-group">
-                    <label class="form-label" id="lblUserField">Franchise Partner ID / Email</label>
+                    <label class="form-label" id="lblUserField">ID de Concesionario / Email Corporativo</label>
                     <input type="text" id="txtUsername" class="form-input" required placeholder="rodrigo.garcia@toronto-mercedes.ca">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" id="lblPassField">Secure Gate Key</label>
+                    <label class="form-label" id="lblPassField">Clave de Acceso Seguro</label>
                     <input type="password" id="txtPassword" class="form-input" required oninput="evaluatePassSecurity(this.value)">
                     <div class="password-strength" id="passStrengthRow">
                         <div class="password-strength-bar" id="passStrengthBar"></div>
@@ -648,18 +648,18 @@
 
                 <div class="login-options">
                     <label class="remember-me">
-                        <input type="checkbox" checked> <span id="lblRemember">Keep secure handshake active</span>
+                        <input type="checkbox" checked> <span id="lblRemember">Mantener enlace seguro activo</span>
                     </label>
-                    <a href="#" class="forgot-password" id="lblForgot">Recover Key Token</a>
+                    <a href="#" class="forgot-password" id="lblForgot">Recuperar Token</a>
                 </div>
 
-                <button type="submit" class="btn-login" id="btnSubmitAccess">ESTABLISH ENCRYPTED GATEWAY</button>
+                <button type="submit" class="btn-login" id="btnSubmitAccess">ESTABLECER CONEXIÓN CIFRADA</button>
 
                 <div class="biometric-auth" onclick="simulateBiometricPass()" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px; padding: 12px; background: var(--deep-space); border: 1px dashed var(--border-color); border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--text-secondary);">
                     <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor;">
                         <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
                     </svg>
-                    <span id="lblBiometric">Pass via Corporate Security ID</span>
+                    <span id="lblBiometric">Acceder mediante ID Corporativa</span>
                 </div>
             </form>
         </div>
@@ -677,8 +677,8 @@
 
             <div class="nav-controls">
                 <div class="experience-toggle">
-                    <button class="toggle-btn active" id="btnExpClient" onclick="switchDomainExperience('dealer')">DEALER PORTAL</button>
-                    <button class="toggle-btn" id="btnExpBusiness" onclick="switchDomainExperience('hq')">HQ CORPORATE CONSOLE</button>
+                    <button class="toggle-btn active" id="btnExpClient" onclick="switchDomainExperience('dealer')">PORTAL DEL CONCESIONARIO</button>
+                    <button class="toggle-btn" id="btnExpBusiness" onclick="switchDomainExperience('hq')">CONSOLA CORPORATIVA HQ</button>
                 </div>
 
                 <div class="lang-selector">
@@ -689,19 +689,19 @@
 
                 <div class="user-profile-badge">
                     <div class="profile-avatar">RG</div>
-                    <span style="font-size: 13px; font-weight: 600;" id="navUserBadge">Rodrigo García (ON-Dealer)</span>
+                    <span style="font-size: 13px; font-weight: 600;" id="navUserBadge">Rodrigo García (ON-Concesionario)</span>
                 </div>
             </div>
         </nav>
 
         <div class="tabs-header" id="dynamicTabsRow">
-            <button class="tab-link active dealer-tab" onclick="activateInternalTab('kpi-concesionario', this)" id="tabLnkVehState">DEALER HEALTH KPIS</button>
-            <button class="tab-link dealer-tab" onclick="activateInternalTab('matriz-asignacion', this)" id="tabLnk360">INVENTORY ALLOCATION MATRIX</button>
-            <button class="tab-link dealer-tab" onclick="activateInternalTab('fondos-mdf', this)" id="tabLnkServices">CO-OP MARKETING FUNDS (MDF)</button>
-            <button class="tab-link dealer-tab" onclick="activateInternalTab('tiers-concesionarios', this)" id="tabLnkShowroom">FRANCHISE TIER STANDARDS</button>
+            <button class="tab-link active dealer-tab" onclick="activateInternalTab('kpi-concesionario', this)" id="tabLnkVehState">KPIs DE SALUD DE AGENCIA</button>
+            <button class="tab-link dealer-tab" onclick="activateInternalTab('matriz-asignacion', this)" id="tabLnk360">MATRIZ DE ASIGNACIÓN</button>
+            <button class="tab-link dealer-tab" onclick="activateInternalTab('fondos-mdf', this)" id="tabLnkServices">FONDOS CO-OP (MDF)</button>
+            <button class="tab-link dealer-tab" onclick="activateInternalTab('tiers-concesionarios', this)" id="tabLnkShowroom">ESTÁNDARES CORPORATIVOS</button>
             
-            <button class="tab-link hq-tab" style="display:none;" onclick="activateInternalTab('hq-network-performance', this)" id="tabLnkDealers">NATIONAL DISTRIBUTION MATRIX</button>
-            <button class="tab-link hq-tab" style="display:none;" onclick="activateInternalTab('hq-predictive-allocation', this)" id="tabLnkPredictive">AI RISK ALLOCATION MODELLING</button>
+            <button class="tab-link hq-tab" style="display:none;" onclick="activateInternalTab('hq-network-performance', this)" id="tabLnkDealers">DISTRIBUCIÓN NACIONAL</button>
+            <button class="tab-link hq-tab" style="display:none;" onclick="activateInternalTab('hq-predictive-allocation', this)" id="tabLnkPredictive">MODELADO DE RIESGO IA</button>
         </div>
 
         <main class="main-content">
@@ -710,12 +710,12 @@
                 <div class="dashboard-grid">
                     <div>
                         <div class="card">
-                            <h3 class="card-title" id="lblCardTelem">CRITICAL OPERATIONAL FRANCHISE PERFORMANCE</h3>
+                            <h3 class="card-title" id="lblCardTelem">RENDIMIENTO OPERATIVO CRÍTICO DE FRANQUICIA</h3>
                             
                             <div class="telemetry-row">
                                 <div class="telemetry-meta">
-                                    <span class="telemetry-label" id="lblTelemOil">SALES TEAM CERTIFICATION RATIO (EV/AMG MASTER)</span>
-                                    <span class="telemetry-value" id="valTelemOil" style="color:var(--nordic-blue)">91% (COMPLIANT)</span>
+                                    <span class="telemetry-label" id="lblTelemOil">RATIO DE CERTIFICACIÓN DE ASESORES (EV/AMG MASTER)</span>
+                                    <span class="telemetry-value" id="valTelemOil" style="color:var(--nordic-blue)">91% (CUMPLIMIENTO)</span>
                                 </div>
                                 <div class="progress-container">
                                     <div class="progress-bar" id="barTelemOil" style="width: 91%; background: var(--nordic-blue);"></div>
@@ -724,8 +724,8 @@
 
                             <div class="telemetry-row">
                                 <div class="telemetry-meta">
-                                    <span class="telemetry-label" id="lblTelemBrakes">SERVICE BAY WORKLOAD LATENCY COEFFICIENT</span>
-                                    <span class="telemetry-value" id="valTelemBrakes" style="color:var(--accent-red)">88% (BOTTLENECK RISK)</span>
+                                    <span class="telemetry-label" id="lblTelemBrakes">COEFICIENTE DE LATENCIA EN TALLERES (SOBRECARGA)</span>
+                                    <span class="telemetry-value" id="valTelemBrakes" style="color:var(--accent-red)">88% (RIESGO DE CUELLO DE BOTELLA)</span>
                                 </div>
                                 <div class="progress-container">
                                     <div class="progress-bar" id="barTelemBrakes" style="width: 88%; background: var(--accent-red);"></div>
@@ -734,8 +734,8 @@
 
                             <div class="telemetry-row">
                                 <div class="telemetry-meta">
-                                    <span class="telemetry-label" id="lblTelemBattery">WARRANTY CLAIMS DATA INTEGRITY SYNC SPEED</span>
-                                    <span class="telemetry-value" id="valTelemBattery" style="color:var(--accent-green)">99% (OPTIMAL PIPELINE)</span>
+                                    <span class="telemetry-label" id="lblTelemBattery">VELOCIDAD DE SINCRONIZACIÓN DE RECLAMOS DE GARANTÍA</span>
+                                    <span class="telemetry-value" id="valTelemBattery" style="color:var(--accent-green)">99% (FLUJO ÓPTIMO)</span>
                                 </div>
                                 <div class="progress-container">
                                     <div class="progress-bar" id="barTelemBattery" style="width: 99%; background: var(--accent-green);"></div>
@@ -744,8 +744,8 @@
 
                             <div class="privacy-banner">
                                 <div class="privacy-info">
-                                    <span class="privacy-title" id="lblPrivTitle">Anonymize Local Franchise Employee Data Streams</span>
-                                    <span class="privacy-desc" id="lblPrivDesc">Enforce secure masking layers matching strict provincial parameters (Quebec Law 25 / PIPEDA).</span>
+                                    <span class="privacy-title" id="lblPrivTitle">Anonimizar Flujo de Datos del Personal Local</span>
+                                    <span class="privacy-desc" id="lblPrivDesc">Aplica capas estrictas de enmascaramiento alineadas con la Ley 25 de Quebec y PIPEDA.</span>
                                 </div>
                                 <label class="toggle-switch">
                                     <input type="checkbox" id="chkAnonymize" onchange="toggleTelemetryPrivacy(this.checked)">
@@ -757,11 +757,11 @@
 
                     <div>
                         <div class="card" style="height: calc(100% - 30px);">
-                            <h3 class="card-title" id="lblCardUrgent">AUTOMATED RE-ALLOCATION CORE</h3>
+                            <h3 class="card-title" id="lblCardUrgent">NÚCLEO DE REASIGNACIÓN AUTOMATIZADA</h3>
                             <p style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:20px;" id="lblUrgentDesc">
-                                AI has detected extreme inventory backlog of luxury ICE Sedans in Western Canadian nodes. System proposes automated redistribution toward high-demand Ontario clusters.
+                                La IA detectó un exceso de stock de sedanes ICE en el oeste de Canadá. El sistema propone una redistribución automatizada hacia los nodos de alta demanda en Ontario.
                             </p>
-                            <button class="btn-action" onclick="triggerAutoAppointment()" id="btnSecureAppoint">CONFIRM AUTOMATED INVENTORY SWAP</button>
+                            <button class="btn-action" onclick="triggerAutoAppointment()" id="btnSecureAppoint">CONFIRMAR TRANSFERENCIA LOGÍSTICA DE STOCK</button>
                         </div>
                     </div>
                 </div>
@@ -774,17 +774,17 @@
                             <div class="stage-360">
                                 <div class="visualizer-overlay-hud">
                                     MERCEDES-BENZ CANADA SUPPLY CHAIN FORWARDER v2.8<br>
-                                    ACTIVE SUITE: REAL-TIME DEALERSHIP STOCK ASSIGNMENT<br>
-                                    PIPELINE STATUS: CONNECTED SECURE TO GERMANY/TORONTO<br>
-                                    SECTOR VIEW: DISTRIBUTION MAP CONTROL
+                                    SUITE ACTIVA: ASIGNACIÓN DE STOCK DE CONCESIONARIO<br>
+                                    ESTADO DEL FLUJO: CONECTADO SEGURO A ALEMANIA/TORONTO<br>
+                                    VISTA DE SECTOR: CONTROL DE MAPA DE DISTRIBUCIÓN
                                 </div>
                                 <img src="https://images.unsplash.com/photo-1618843479619-f93a9825b290?auto=format&fit=crop&q=80&w=1200" id="main360CarView" class="allocation-map-display" alt="Mercedes Inventory Logistics Staging">
                                 
                                 <div class="rotation-controls">
                                     <button class="angle-btn active" onclick="renderVehicleAngle('ontario', this)" id="btnAngFront">Ontario</button>
                                     <button class="angle-btn" onclick="renderVehicleAngle('quebec', this)" id="btnAngProfile">Quebec</button>
-                                    <button class="angle-btn" onclick="renderVehicleAngle('western', this)" id="btnAngRear">Western</button>
-                                    <button class="angle-btn" onclick="renderVehicleAngle('atlantic', this)" id="btnAngInterior">Atlantic</button>
+                                    <button class="angle-btn" onclick="renderVehicleAngle('western', this)" id="btnAngRear">Oeste</button>
+                                    <button class="angle-btn" onclick="renderVehicleAngle('atlantic', this)" id="btnAngInterior">Atlántico</button>
                                 </div>
                             </div>
                         </div>
@@ -792,31 +792,31 @@
 
                     <div>
                         <div class="card" style="height: calc(100% - 30px); margin-bottom:0;">
-                            <h3 class="card-title" id="lblCardEngineArch">REGIONAL HUB STOCK SPECS</h3>
+                            <h3 class="card-title" id="lblCardEngineArch">ESPECIFICACIONES LOGÍSTICAS DE HUB</h3>
                             <div class="specs-grid">
                                 <div class="spec-item">
-                                    <div class="spec-label" id="lblSpecModel">TARGET HUB REALM</div>
-                                    <div class="spec-value" id="valTargetHub">Ontario Cluster Node</div>
+                                    <div class="spec-label" id="lblSpecModel">REALM DEL HUB OBJETIVO</div>
+                                    <div class="spec-value" id="valTargetHub">Nodo del Clúster de Ontario</div>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label" id="lblSpecConfig">ALLOCATED ELECTRIC ARCHITECTURES (EQ SERIES)</div>
-                                    <div class="spec-value" id="valSpecConfig">145 Units Preserved</div>
+                                    <div class="spec-label" id="lblSpecConfig">ARQUITECTURAS ELÉCTRICAS ASIGNADAS (EQ)</div>
+                                    <div class="spec-value" id="valSpecConfig">145 Unidades Reservadas</div>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label" id="lblSpecOutput">HIGH PERFORMANCE PERFORMANCE INDUCTION (AMG MASTER)</div>
-                                    <div class="spec-value">38 Units Active Transit</div>
+                                    <div class="spec-label" id="lblSpecOutput">VEHÍCULOS DE ALTO RENDIMIENTO (AMG)</div>
+                                    <div class="spec-value">38 Unidades en Tránsito</div>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label" id="lblSpecTorque">COMMERCIAL LOGISTICS FLEET (SPRINTER VOLUMES)</div>
-                                    <div class="spec-value">62 Units Staged</div>
+                                    <div class="spec-label" id="lblSpecTorque">FLOTA COMERCIAL LOGÍSTICA (SPRINTER)</div>
+                                    <div class="spec-value">62 Unidades Preparadas</div>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label" id="lblSpecDisp">PORT HOLD STABILITY MATRIX</div>
-                                    <div class="spec-value">Halifax Transit Core</div>
+                                    <div class="spec-label" id="lblSpecDisp">MATRIZ DE ESTABILIDAD EN PUERTOS</div>
+                                    <div class="spec-value">Núcleo de Tránsito Halifax</div>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label" id="lblSpecDrivetrain">DAYS-SUPPLY TURNOVER MEDIAN</div>
-                                    <div class="spec-value">22 Days Pipeline Vel.</div>
+                                    <div class="spec-label" id="lblSpecDrivetrain">MEDIANA DE ROTACIÓN (DAYS-SUPPLY)</div>
+                                    <div class="spec-value">22 Días Vel. Flujo</div>
                                 </div>
                             </div>
                         </div>
@@ -828,33 +828,33 @@
                 <div class="dashboard-grid">
                     <div>
                         <div class="card">
-                            <h3 class="card-title" id="lblCardMaintenance">CO-OP MARKETING DEVELOPMENT FUND (MDF) REVENUE ALLOCATION</h3>
+                            <h3 class="card-title" id="lblCardMaintenance">ASIGNACIÓN DE FONDOS DE MARKETING (MDF)</h3>
                             <div class="checklist-group">
                                 <label class="checklist-item" onclick="recalculateCostMatrix()">
                                     <div class="checklist-left">
                                         <input type="checkbox" checked class="checklist-checkbox" value="15000" data-tax="1950">
-                                        <span class="checklist-name" id="chkNameBrakes">Tier-3 Localized Digital Performance Target Marketing Package</span>
+                                        <span class="checklist-name" id="chkNameBrakes">Paquete de Marketing Digital Local (Tier-3)</span>
                                     </div>
                                     <span class="checklist-cost">$15,000.00 CAD</span>
                                 </label>
                                 <label class="checklist-item" onclick="recalculateCostMatrix()">
                                     <div class="checklist-left">
                                         <input type="checkbox" class="checklist-checkbox" value="32000" data-tax="4160">
-                                        <span class="checklist-name" id="chkNameOil">Winter Drive Experiential Staging Showroom Assets & Displays</span>
+                                        <span class="checklist-name" id="chkNameOil">Displays y Activos de Exhibición Campaña de Invierno</span>
                                     </div>
                                     <span class="checklist-cost">$32,000.00 CAD</span>
                                 </label>
                                 <label class="checklist-item" onclick="recalculateCostMatrix()">
                                     <div class="checklist-left">
                                         <input type="checkbox" class="checklist-checkbox" value="8500" data-tax="1105">
-                                        <span class="checklist-name" id="chkNameTires">Regional French-Speaking Localized Compliance Radio/Print Collaterals</span>
+                                        <span class="checklist-name" id="chkNameTires">Radio y Prensa Localizados en Francés (Cumplimiento Quebec)</span>
                                     </div>
                                     <span class="checklist-cost">$8,500.00 CAD</span>
                                 </label>
                                 <label class="checklist-item" onclick="recalculateCostMatrix()">
                                     <div class="checklist-left">
                                         <input type="checkbox" class="checklist-checkbox" value="45000" data-tax="5850">
-                                        <span class="checklist-name" id="chkNameSoftware">Regional Luxury Private Executive Gala Event Sponsorship Sponsorship</span>
+                                        <span class="checklist-name" id="chkNameSoftware">Patrocinio de Gala Ejecutiva de Lujo y Evento RP</span>
                                     </div>
                                     <span class="checklist-cost">$45,000.00 CAD</span>
                                 </label>
@@ -864,22 +864,22 @@
 
                     <div>
                         <div class="card">
-                            <h3 class="card-title" id="lblCardInvoice">MDF CLEARING ESCROW LEDGER DETAILED OVERVIEW</h3>
+                            <h3 class="card-title" id="lblCardInvoice">ESTADO DE CUENTA Y CUSTODIA (MDF LEDGER)</h3>
                             <div class="estimator-box">
                                 <div class="estimator-row">
-                                    <span id="lblInvoiceSub">NET CO-OP FUND REQUEST REQUESTED:</span>
+                                    <span id="lblInvoiceSub">REQUERIMIENTO NETO DE FONDOS:</span>
                                     <span id="valInvoiceSub">$15,000.00 CAD</span>
                                 </div>
                                 <div class="estimator-row">
-                                    <span id="lblInvoiceTax">ESTIMATED MB CANADA CO-MATCH CONTRIBUTION (13% MATCH):</span>
+                                    <span id="lblInvoiceTax">CONTRIBUCIÓN CO-MATCH MB CANADA (13%):</span>
                                     <span id="valInvoiceTax">$1,950.00 CAD</span>
                                 </div>
                                 <div class="estimator-row estimator-total">
-                                    <span id="lblInvoiceTotal">TOTAL PROTECTED ESCROW DISBURSEMENT:</span>
+                                    <span id="lblInvoiceTotal">DISBURSEMENT TOTAL DE CUSTODIA:</span>
                                     <span id="valInvoiceTotal">$16,950.00 CAD</span>
                                 </div>
                             </div>
-                            <button class="btn-action" style="margin-top:20px;" onclick="triggerPaymentProcessing()" id="btnAuthorizeEscrow">SUBMIT MDF REVENUE CLEARING DISPATCH</button>
+                            <button class="btn-action" style="margin-top:20px;" onclick="triggerPaymentProcessing()" id="btnAuthorizeEscrow">ENVIAR SOLICITUD DE LIBERACIÓN MDF</button>
                         </div>
                     </div>
                 </div>
@@ -887,16 +887,16 @@
 
             <div id="tiers-concesionarios" class="view-panel">
                 <div class="card">
-                    <h3 class="card-title" id="lblCardShowroom">MERCEDES-BENZ CANADA FRANCHISE BRANDING COMPLIANCE</h3>
+                    <h3 class="card-title" id="lblCardShowroom">COMPLIANCE DE MARCA EN CONCESIONARIOS MERCEDES-BENZ</h3>
                     <div class="showroom-grid">
                         <div class="vehicle-card">
                             <div class="vehicle-img-box">
                                 <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=600" alt="AMG Performance Center Compliance">
                             </div>
                             <div class="vehicle-info">
-                                <span class="vehicle-tag">AMG TIER 1 HUB</span>
-                                <h4 class="vehicle-name">AMG Performance Staging Standard</h4>
-                                <span class="vehicle-price">Audited Compliance: 98.2%</span>
+                                <span class="vehicle-tag">HUB AMG TIER 1</span>
+                                <h4 class="vehicle-name">Estándar de Rendimiento AMG</h4>
+                                <span class="vehicle-price">Cumplimiento Auditado: 98.2%</span>
                             </div>
                         </div>
 
@@ -905,9 +905,9 @@
                                 <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=600" alt="Pure EV Showroom Grid">
                             </div>
                             <div class="vehicle-info">
-                                <span class="vehicle-tag">MERCEDES-ELECTRIC CORE</span>
-                                <h4 class="vehicle-name">EQ Architecture High-Voltage Infrastructure</h4>
-                                <span class="vehicle-price">DC Fast-Chargers Synced: 55/55</span>
+                                <span class="vehicle-tag">NÚCLEO ELÉCTRICO MERCEDES</span>
+                                <h4 class="vehicle-name">Infraestructura Alto Voltaje EQ</h4>
+                                <span class="vehicle-price">Cargadores Rápidos Sincronizados: 55/55</span>
                             </div>
                         </div>
 
@@ -916,9 +916,9 @@
                                 <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=600" alt="Corporate Showroom Floor Elements">
                             </div>
                             <div class="vehicle-info">
-                                <span class="vehicle-tag">LUXURY BOUTIQUE SPACE</span>
-                                <h4 class="vehicle-name">S-Class Atelier Elite Lounge Guidelines</h4>
-                                <span class="vehicle-price">Mandatory Spatial Signage v4</span>
+                                <span class="vehicle-tag">ESPACIO BOUTIQUE DE LUJO</span>
+                                <h4 class="vehicle-name">Directrices Elite Lounge Clase S</h4>
+                                <span class="vehicle-price">Señalización Espacial Obligatoria v4</span>
                             </div>
                         </div>
                     </div>
@@ -929,68 +929,68 @@
                 <div class="metric-matrix">
                     <div class="metric-card">
                         <div class="metric-header">
-                            <span id="lblMetActiveDealers">Total Network Dealerships Synced</span>
-                            <span class="metric-trend up">HEALTHY INTEGRATION</span>
+                            <span id="lblMetActiveDealers">Red de Concesionarios Sincronizados</span>
+                            <span class="metric-trend up">ESTADO SALUDABLE</span>
                         </div>
-                        <div class="metric-main-value">55 Dealers</div>
+                        <div class="metric-main-value">55 Concesionarios</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-header">
-                            <span id="lblMetNetRevenue">National Integrated Wholesale Flow</span>
-                            <span class="metric-trend up">+18.7% Year-to-Date</span>
+                            <span id="lblMetNetRevenue">Flujo Mayorista Integrado Nacional</span>
+                            <span class="metric-trend up">+18.7% Anual Acumulado</span>
                         </div>
                         <div class="metric-main-value">$142.8M CAD</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-header">
-                            <span id="lblMetPRMShare">PRM Endpoint Data Connection Rate</span>
-                            <span class="metric-trend up">100% Core Online</span>
+                            <span id="lblMetPRMShare">Tasa de Conexión Endpoint PRM</span>
+                            <span class="metric-trend up">100% Nodos Activos</span>
                         </div>
-                        <div class="metric-main-value">55 / 55 Nodes</div>
+                        <div class="metric-main-value">55 / 55 Nodos</div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title" id="lblCardDealersTable">NATIONAL NETWORK LOGISTICS FRANCHISE INTERFACE CONTROL</h3>
+                    <h3 class="card-title" id="lblCardDealersTable">MONITOREO DE RED LOGÍSTICA NACIONAL</h3>
                     <div class="table-responsive">
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th id="thDealerID">Concessionaire ID / Anchor</th>
-                                    <th id="thDealerRegion">Geographic Territory</th>
-                                    <th id="thDealerSync">MDF Utilization Rate</th>
-                                    <th id="thDealerRev">Wholesale Volume Value</th>
-                                    <th id="thDealerStatus">Operational Mode Status</th>
+                                    <th id="thDealerID">ID Concesionario / Ancla</th>
+                                    <th id="thDealerRegion">Territorio Geográfico</th>
+                                    <th id="thDealerSync">Tasa de Utilización MDF</th>
+                                    <th id="thDealerRev">Volumen Mayorista (Wholesale)</th>
+                                    <th id="thDealerStatus">Estado del Nivel (Tier)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>MB Toronto Downtown Core</td>
                                     <td>Ontario (ON)</td>
-                                    <td>94% Disbursed</td>
+                                    <td>94% Desembolsado</td>
                                     <td>$24,500,000 CAD</td>
-                                    <td><span class="status-pill success">PLATINUM LEVEL</span></td>
+                                    <td><span class="status-pill success">NIVEL PLATINO</span></td>
                                 </tr>
                                 <tr>
                                     <td>MB Vancouver Luxury Corporate</td>
                                     <td>British Columbia (BC)</td>
-                                    <td>82% Disbursed</td>
+                                    <td>82% Desembolsado</td>
                                     <td>$19,800,000 CAD</td>
-                                    <td><span class="status-pill success">PLATINUM LEVEL</span></td>
+                                    <td><span class="status-pill success">NIVEL PLATINO</span></td>
                                 </tr>
                                 <tr>
                                     <td>MB Montreal Elite Fleet Center</td>
                                     <td>Quebec (QC)</td>
-                                    <td>100% Fully Utilized</td>
+                                    <td>100% Totalmente Utilizado</td>
                                     <td>$16,500,000 CAD</td>
-                                    <td><span class="status-pill success">GOLD COMPLIANT</span></td>
+                                    <td><span class="status-pill success">CUMPLIMIENTO ORO</span></td>
                                 </tr>
                                 <tr>
                                     <td>MB Calgary Plains Distribution</td>
                                     <td>Alberta (AB)</td>
-                                    <td>41% Underutilized</td>
+                                    <td>41% Subutilizado</td>
                                     <td>$9,200,000 CAD</td>
-                                    <td><span class="status-pill warning">ALLOCATION WARNING</span></td>
+                                    <td><span class="status-pill warning">ADVERTENCIA ASIGNACIÓN</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1002,39 +1002,39 @@
                 <div class="dashboard-grid">
                     <div>
                         <div class="card">
-                            <h3 class="card-title" id="lblCardChurn">COGNITIVE STOCK OUT MATRIX & ALLOCATION SURGE VALUE AT RISK</h3>
+                            <h3 class="card-title" id="lblCardChurn">MATRIZ DE RIESGO DE DESABASTO Y VALOR DE ASIGNACIÓN</h3>
                             <div class="table-responsive">
                                 <table class="data-table">
                                     <thead>
                                         <tr>
-                                            <th id="thChurnClient">Franchise Node Location</th>
-                                            <th id="thChurnModel">High-Velocity Stock Asset</th>
-                                            <th id="thChurnRisk">Calculated Allocation Supply Interruption Threat</th>
-                                            <th id="thChurnLTV">Value At Operational Risk Weight</th>
-                                            <th id="thChurnAction">Automated Optimization Correction Recommendation</th>
+                                            <th id="thChurnClient">Ubicación del Nodo</th>
+                                            <th id="thChurnModel">Activo de Alta Velocidad</th>
+                                            <th id="thChurnRisk">Riesgo Calculado de Interrupción</th>
+                                            <th id="thChurnLTV">Valor de Operación en Riesgo</th>
+                                            <th id="thChurnAction">Recomendación IA Automatizada</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>MB Toronto Downtown Core</td>
                                             <td>AMG GT Series / EQE SUV</td>
-                                            <td style="color:var(--accent-green); font-weight:700;">2.1% (Stable Stock Flows)</td>
+                                            <td style="color:var(--accent-green); font-weight:700;">2.1% (Flujos Estables)</td>
                                             <td>$4,500,000 CAD</td>
-                                            <td>Maintain Baseline Priority Allocation Stream Rules</td>
+                                            <td>Mantener Reglas de Prioridad Base</td>
                                         </tr>
                                         <tr>
                                             <td>MB Calgary Plains Distribution</td>
                                             <td>Sprinter Logistics Commercial Vans</td>
-                                            <td style="color:var(--accent-orange); font-weight:700;">44.8% (Medium Shortage Threat)</td>
+                                            <td style="color:var(--accent-orange); font-weight:700;">44.8% (Amenaza Media)</td>
                                             <td>$12,250,000 CAD</td>
-                                            <td>Reroute Vancouver Port Backlog Automatically to Alberta Node</td>
+                                            <td>Redirigir Atrasos del Puerto Vancouver al Nodo Alberta</td>
                                         </tr>
                                         <tr>
                                             <td>MB Quebec City Inter-Boreal Hub</td>
                                             <td>4MATIC Cold-Weather Utility Architecture</td>
-                                            <td style="color:var(--accent-red); font-weight:700;">81.3% (Critical Supply Collapse Risk)</td>
+                                            <td style="color:var(--accent-red); font-weight:700;">81.3% (Riesgo Crítico)</td>
                                             <td>$6,490,000 CAD</td>
-                                            <td>Inject Immediate Strategic Allocation Transfer from Core Toronto Reserve</td>
+                                            <td>Inyectar Transferencia Inmediata desde la Reserva Toronto</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1044,33 +1044,33 @@
 
                     <div>
                         <div class="card" style="height: calc(100% - 30px); margin-bottom:0;">
-                            <h3 class="card-title" id="lblCardAiLogs">CRITICAL PLATFORM AI TRANSACTIONARY LOGS</h3>
+                            <h3 class="card-title" id="lblCardAiLogs">LOGS TRANSACCIONALES DE IA</h3>
                             <div class="ai-log-container" id="aiLogsDashboardBlock">
                                 <div class="ai-log-card">
                                     <div class="ai-log-meta">
-                                        <span>SUPPLY REBALANCER</span>
-                                        <span>JUST NOW</span>
+                                        <span>REBALANCEADOR DE SUMINISTRO</span>
+                                        <span>JUSTO AHORA</span>
                                     </div>
                                     <div class="ai-log-text">
-                                        National warehouse stock metrics evaluated for Ontario Dealer Node Cluster. Supply adjustment processed and mapped to pipeline dashboards.
+                                        Métricas de stock nacional evaluadas para el Clúster de Concesionarios de Ontario. Ajuste de suministro procesado en paneles de flujo.
                                     </div>
                                 </div>
                                 <div class="ai-log-card">
                                     <div class="ai-log-meta">
-                                        <span>REGULATORY MASKING ENGINE</span>
-                                        <span>4 MINS AGO</span>
+                                        <span>MOTOR DE ENMASCARAMIENTO REGULATORIO</span>
+                                        <span>HACE 4 MIN</span>
                                     </div>
                                     <div class="ai-log-text">
-                                        Franchise financial packet compiled for Montreal Elite Hub. Applied strict Bill 25 secure structural hashing protocols to dealer payroll arrays.
+                                        Paquete financiero compilado para Montreal Elite Hub. Se aplicaron protocolos de hashing estructural seguro (Ley 25 de Quebec) a nóminas.
                                     </div>
                                 </div>
                                 <div class="ai-log-card">
                                     <div class="ai-log-meta">
-                                        <span>MDF CLEARING INTELLIGENCE</span>
-                                        <span>12 MINS AGO</span>
+                                        <span>INTELIGENCIA DE COMPENSACIÓN MDF</span>
+                                        <span>HACE 12 MIN</span>
                                     </div>
                                     <div class="ai-log-text">
-                                        Forecasting pipeline ran across 55 corporate ledger nodes. Verification baseline score settled cleanly at 98.4% target efficiency parameter.
+                                        Proceso de pronóstico ejecutado a través de 55 nodos corporativos. La puntuación de eficiencia se estableció limpiamente en 98.4%.
                                     </div>
                                 </div>
                             </div>
@@ -1082,31 +1082,31 @@
             <hr style="border: none; border-top: 1px solid var(--border-color); margin: 40px 0 30px 0;">
             
             <div class="card" style="background: rgba(10, 12, 16, 0.5);">
-                <h4 class="laudon-matrix-title" id="lblLaudonHeader">LAUDON & LAUDON PRM STRATEGIC SYSTEM MAP: FRANCHISE MEDIATING FACTORS (FIGURE 3.1)</h4>
+                <h4 class="laudon-matrix-title" id="lblLaudonHeader">MAPA DE ALINEACIÓN SISTÉMICA PRM: FACTORES MEDIADORES DE FRANQUICIA (LAUDON FIGURA 3.1)</h4>
                 <div class="laudon-grid">
                     <div class="laudon-factor-card">
-                        <div class="factor-header" id="fHeaderEntorno">ENTORNO (ENVIRONMENT)</div>
-                        <div class="factor-body" id="fBodyEntorno">Mutes severe Canadian weather interruptions across the supply chain. Converts rail freight track bottlenecks directly into automated stock re-routing maneuvers.</div>
+                        <div class="factor-header" id="fHeaderEntorno">ENTORNO</div>
+                        <div class="factor-body" id="fBodyEntorno">Mitiga las interrupciones por clima severo en la cadena de suministro en Canadá. Convierte los cuellos de botella ferroviarios en maniobras de re-enrutamiento automático.</div>
                     </div>
                     <div class="laudon-factor-card">
-                        <div class="factor-header" id="fHeaderCultura">CULTURA (ORGANIZATIONAL CULTURE)</div>
-                        <div class="factor-body" id="fBodyCultura">Sustains pristine Mercedes luxury expectations across independent dealership entities. Replaces traditional friction-heavy ordering emails with unified corporate transparent dashboards.</div>
+                        <div class="factor-header" id="fHeaderCultura">CULTURA ORGANIZACIONAL</div>
+                        <div class="factor-body" id="fBodyCultura">Mantiene las impecables expectativas de lujo de Mercedes en entidades de concesionarios independientes. Reemplaza correos por paneles corporativos unificados.</div>
                     </div>
                     <div class="laudon-factor-card">
-                        <div class="factor-header" id="fHeaderEstructura">ESTRUCTURA (STRUCTURE)</div>
-                        <div class="factor-body" id="fBodyEstructura">Binds 55 completely autonomous multi-owner franchises under a secure, integrated corporate node cluster network. Standardizes strict compliance without eroding independent ownership business focus.</div>
+                        <div class="factor-header" id="fHeaderEstructura">ESTRUCTURA</div>
+                        <div class="factor-body" id="fBodyEstructura">Vincula 55 franquicias completamente autónomas bajo un clúster corporativo seguro. Estandariza el cumplimiento estricto sin erosionar el enfoque comercial local.</div>
                     </div>
                     <div class="laudon-factor-card">
-                        <div class="factor-header" id="fProcesos">PROCESOS DE NEGOCIO (BUSINESS PROCESSES)</div>
-                        <div class="factor-body" id="fBodyProcesos">Replaces legacy allocation requests with dynamic automated inventory allocations. Connects current dealer sales performance speeds to global manufacturing plants directly.</div>
+                        <div class="factor-header" id="fHeaderProcesos">PROCESOS DE NEGOCIO</div>
+                        <div class="factor-body" id="fBodyProcesos">Reemplaza las solicitudes de asignación heredadas por asignaciones de inventario dinámicas. Conecta la velocidad de ventas local con la fabricación global directamente.</div>
                     </div>
                     <div class="laudon-factor-card">
-                        <div class="factor-header" id="fHeaderPoliticas">POLÍTICAS (POLITICS/POLICIES)</div>
-                        <div class="factor-body" id="fBodyPoliticas">Mediates corporate-franchisee friction over vehicle allotments. Guarantees absolute fairness in allocation algorithms and ensures local operational compliance with Bill 25 data protection laws.</div>
+                        <div class="factor-header" id="fHeaderPoliticas">POLÍTICAS</div>
+                        <div class="factor-body" id="fBodyPoliticas">Media la fricción entre la corporación y la franquicia sobre la asignación de vehículos. Garantiza equidad en algoritmos y cumplimiento de leyes de datos (Ley 25/PIPEDA).</div>
                     </div>
                     <div class="laudon-factor-card">
-                        <div class="factor-header" id="fHeaderDecisiones">DECISIONES GERENCIALES (MANAGEMENT DECISIONS)</div>
-                        <div class="factor-body" id="fBodyDecisiones">Eliminates reactive supply adjustments. Equips executives with real-time MDF performance metrics and predictive regional inventory depletion models.</div>
+                        <div class="factor-header" id="fHeaderDecisiones">DECISIONES GERENCIALES</div>
+                        <div class="factor-body" id="fBodyDecisiones">Elimina los ajustes de suministro reactivos. Equipa a los ejecutivos con métricas MDF en tiempo real y modelos predictivos de agotamiento de inventario.</div>
                     </div>
                 </div>
             </div>
@@ -1116,29 +1116,31 @@
 
     <script>
         const AppState = {
-            currentDomain: 'dealer', // Options: 'dealer' | 'hq'
-            currentLanguage: 'es',   // Options: 'es' | 'en' | 'fr'
+            currentDomain: 'dealer', 
+            currentLanguage: 'es',   
             activeHubView: 'ontario',
             isAuthenticated: false
         };
 
         const Lexicon = {
             es: {
+                btnExpClient: "PORTAL DEL CONCESIONARIO",
+                btnExpBusiness: "CONSOLA CORPORATIVA HQ",
                 loginTitle: "Mercedes-Benz Canada",
-                loginSubtitle: "Portal de Gestión de Socios Comerciales (PRM)",
+                loginSubtitle: "Portal de Gestión de Socios (PRM)",
                 userField: "ID de Concesionario / Email Corporativo",
-                passField: "Clave de Acceso Seguro de Red",
+                passField: "Clave de Acceso Seguro",
                 remember: "Mantener enlace seguro activo",
-                forgot: "Recuperar Token de Acceso",
+                forgot: "Recuperar Token",
                 submitAccess: "ESTABLECER CONEXIÓN CIFRADA",
-                biometric: "Acceder mediante Identificación Corporativa",
-                tabVehState: "KPIs DE SALUD DE LA AGENCIA",
-                tab360: "MATRIZ DE ASIGNACIÓN DE INVENTARIO",
-                tabServices: "FONDOS CO-OP DE MARKETING (MDF)",
-                tabShowroom: "ESTÁNDARES DE CUMPLIMIENTO CORPORATIVO",
-                tabDealers: "MATRIZ DE DISTRIBUCIÓN NACIONAL",
-                tabPredictive: "MODELADO DE RIESGO POR IA",
-                cardTelem: "RENDIMIENTO OPERATIVO CRÍTICO DE LA FRANQUICIA",
+                biometric: "Acceder mediante ID Corporativa",
+                tabVehState: "KPIs DE SALUD DE AGENCIA",
+                tab360: "MATRIZ DE ASIGNACIÓN",
+                tabServices: "FONDOS CO-OP (MDF)",
+                tabShowroom: "ESTÁNDARES CORPORATIVOS",
+                tabDealers: "DISTRIBUCIÓN NACIONAL",
+                tabPredictive: "MODELADO DE RIESGO IA",
+                cardTelem: "RENDIMIENTO OPERATIVO CRÍTICO DE FRANQUICIA",
                 telemOil: "RATIO DE CERTIFICACIÓN DE ASESORES (EV/AMG MASTER)",
                 telemBrakes: "COEFICIENTE DE LATENCIA EN TALLERES (SOBRECARGA)",
                 telemBattery: "VELOCIDAD DE SINCRONIZACIÓN DE RECLAMOS DE GARANTÍA",
@@ -1147,43 +1149,57 @@
                 cardUrgent: "NÚCLEO DE REASIGNACIÓN AUTOMATIZADA",
                 urgentDesc: "La IA detectó un exceso de stock de sedanes ICE en el oeste de Canadá. El sistema propone una redistribución automatizada hacia los nodos de alta demanda en Ontario.",
                 secureAppoint: "CONFIRMAR TRANSFERENCIA LOGÍSTICA DE STOCK",
-                cardEngineArch: "ESPECIFICACIONES DE LOGÍSTICA EN HUBS",
+                cardEngineArch: "ESPECIFICACIONES LOGÍSTICAS DE HUB",
                 specModel: "REALM DEL HUB OBJETIVO",
                 specConfig: "ARQUITECTURAS ELÉCTRICAS ASIGNADAS (EQ)",
-                specOutput: "VEHÍCULOS DE ALTO RENDIMIENTO (AMG IN TRANSIT)",
+                specOutput: "VEHÍCULOS DE ALTO RENDIMIENTO (AMG)",
                 specTorque: "FLOTA COMERCIAL LOGÍSTICA (SPRINTER)",
                 specDisp: "MATRIZ DE ESTABILIDAD EN PUERTOS",
-                specDrivetrain: "MEDIANA DE ROTACIÓN DE INVENTARIO (DAYS-SUPPLY)",
-                cardMaintenance: "ASIGNACIÓN DE REVENUE DE FONDOS DE MARKETING (MDF)",
-                chkNameBrakes: "Paquete de Marketing Digital de Rendimiento Local (Tier-3)",
-                chkNameOil: "Displays y Activos de Exhibición para Campaña de Invierno",
-                chkNameTires: "Colaterales de Radio y Prensa Localizados en Francés (Cumplimiento Quebec)",
-                chkNameSoftware: "Patrocinio de Gala Ejecutiva de Lujo y Evento de Relaciones Públicas",
-                cardInvoice: "ESTADO DE CUENTA Y REGISTRO EN CUSTODIA (MDF LEDGER)",
-                invoiceSub: "REQUERIMIENTO NETO DE FONDOS CO-OP:",
-                invoiceTax: "CONTRIBUCIÓN DE CO-MATCH MB CANADA (13% MATCH):",
-                invoiceTotal: "DISBURSEMENT TOTAL DE FONDOS EN CUSTODIA:",
-                authorizeEscrow: "ENVIAR SOLICITUD DE LIBERACIÓN DE FONDOS MDF",
+                specDrivetrain: "MEDIANA DE ROTACIÓN (DAYS-SUPPLY)",
+                cardMaintenance: "ASIGNACIÓN DE FONDOS DE MARKETING (MDF)",
+                chkNameBrakes: "Paquete de Marketing Digital Local (Tier-3)",
+                chkNameOil: "Displays y Activos de Exhibición Campaña de Invierno",
+                chkNameTires: "Radio y Prensa Localizados en Francés (Cumplimiento Quebec)",
+                chkNameSoftware: "Patrocinio de Gala Ejecutiva de Lujo y Evento RP",
+                cardInvoice: "ESTADO DE CUENTA Y CUSTODIA (MDF LEDGER)",
+                invoiceSub: "REQUERIMIENTO NETO DE FONDOS:",
+                invoiceTax: "CONTRIBUCIÓN CO-MATCH MB CANADA (13%):",
+                invoiceTotal: "DISBURSEMENT TOTAL DE CUSTODIA:",
+                authorizeEscrow: "ENVIAR SOLICITUD DE LIBERACIÓN MDF",
                 cardShowroom: "COMPLIANCE DE MARCA EN CONCESIONARIOS MERCEDES-BENZ",
-                metActiveDealers: "Red Global de Concesionarios Sincronizados",
+                metActiveDealers: "Red de Concesionarios Sincronizados",
                 metNetRevenue: "Flujo Mayorista Integrado Nacional",
-                metPRMShare: "Tasa de Endpoint Activo PRM",
-                cardDealersTable: "MONITOREO DE RED LOGÍSTICA Y CONCESIONARIOS NACIONALES",
+                metPRMShare: "Tasa de Conexión Endpoint PRM",
+                cardDealersTable: "MONITOREO DE RED LOGÍSTICA NACIONAL",
                 thDealerID: "ID Concesionario / Ancla",
                 thDealerRegion: "Territorio Geográfico",
-                thDealerSync: "Tasa de Utilización de MDF",
-                thDealerRev: "Volumen de Compra Mayorista (Wholesale)",
-                thDealerStatus: "Estado del Nivel Operativo (Tier)",
-                cardChurn: "MATRIZ COGNITIVA DE DESABASTO Y VALOR DE ASIGNACIÓN EN RIESGO",
-                thChurnClient: "Ubicación del Nodo de Franquicia",
-                thChurnModel: "Activo de Stock de Alta Velocidad",
-                thChurnRisk: "Riesgo Calculado de Interrupción de Suministro",
-                thChurnLTV: "Peso del Valor de Operación en Riesgo",
-                thChurnAction: "Recomendación Automatizada de Corrección por IA",
-                cardAiLogs: "LOGS TRANSACCIONALES CRÍTICOS DE LA INTELIGENCIA ARTIFICIAL",
-                laudonHeader: "MAPA DE ALINEACIÓN SISTÉMICA PRM: FACTORES MEDIADORES DE FRANQUICIA (LAUDON FIGURA 3.1)"
+                thDealerSync: "Tasa de Utilización MDF",
+                thDealerRev: "Volumen Mayorista (Wholesale)",
+                thDealerStatus: "Estado del Nivel (Tier)",
+                cardChurn: "MATRIZ DE RIESGO DE DESABASTO Y VALOR DE ASIGNACIÓN",
+                thChurnClient: "Ubicación del Nodo",
+                thChurnModel: "Activo de Alta Velocidad",
+                thChurnRisk: "Riesgo Calculado de Interrupción",
+                thChurnLTV: "Valor de Operación en Riesgo",
+                thChurnAction: "Recomendación IA Automatizada",
+                cardAiLogs: "LOGS TRANSACCIONALES DE IA",
+                laudonHeader: "MAPA DE ALINEACIÓN SISTÉMICA PRM: FACTORES MEDIADORES DE FRANQUICIA (LAUDON FIGURA 3.1)",
+                fHeaderEntorno: "ENTORNO",
+                fBodyEntorno: "Mitiga las interrupciones por clima severo en la cadena de suministro en Canadá. Convierte los cuellos de botella ferroviarios en maniobras de re-enrutamiento automático.",
+                fHeaderCultura: "CULTURA ORGANIZACIONAL",
+                fBodyCultura: "Mantiene las impecables expectativas de lujo de Mercedes en entidades de concesionarios independientes. Reemplaza correos por paneles corporativos unificados.",
+                fHeaderEstructura: "ESTRUCTURA",
+                fBodyEstructura: "Vincula 55 franquicias completamente autónomas bajo un clúster corporativo seguro. Estandariza el cumplimiento estricto sin erosionar el enfoque comercial local.",
+                fHeaderProcesos: "PROCESOS DE NEGOCIO",
+                fBodyProcesos: "Reemplaza las solicitudes de asignación heredadas por asignaciones de inventario dinámicas. Conecta la velocidad de ventas local con la fabricación global directamente.",
+                fHeaderPoliticas: "POLÍTICAS",
+                fBodyPoliticas: "Media la fricción entre la corporación y la franquicia sobre la asignación de vehículos. Garantiza equidad en algoritmos y cumplimiento de leyes de datos (Ley 25/PIPEDA).",
+                fHeaderDecisiones: "DECISIONES GERENCIALES",
+                fBodyDecisiones: "Elimina los ajustes de suministro reactivos. Equipa a los ejecutivos con métricas MDF en tiempo real y modelos predictivos de agotamiento de inventario."
             },
             en: {
+                btnExpClient: "DEALER PORTAL",
+                btnExpBusiness: "HQ CORPORATE CONSOLE",
                 loginTitle: "Mercedes-Benz Canada",
                 loginSubtitle: "Partner Relationship Management (PRM) Hub",
                 userField: "Franchise Partner ID / Email",
@@ -1206,19 +1222,19 @@
                 privDesc: "Enforce secure masking layers matching strict provincial parameters (Quebec Law 25 / PIPEDA).",
                 cardUrgent: "AUTOMATED RE-ALLOCATION CORE",
                 urgentDesc: "AI has detected extreme inventory backlog of luxury ICE Sedans in Western Canadian nodes. System proposes automated redistribution toward high-demand Ontario clusters.",
-                secureAppoint: "CONFIRMAR TRANSFERENCIA LOGÍSTICA DE STOCK",
+                secureAppoint: "CONFIRM AUTOMATED INVENTORY SWAP",
                 cardEngineArch: "REGIONAL HUB STOCK SPECS",
                 specModel: "TARGET HUB REALM",
                 specConfig: "ALLOCATED ELECTRIC ARCHITECTURES (EQ SERIES)",
-                specOutput: "HIGH PERFORMANCE PERFORMANCE INDUCTION (AMG MASTER)",
-                specTorque: "COMMERCIAL LOGISTICS FLEET (SPRINTER VOLUMES)",
+                specOutput: "HIGH PERFORMANCE PERFORMANCE INDUCTION (AMG)",
+                specTorque: "COMMERCIAL LOGISTICS FLEET (SPRINTER)",
                 specDisp: "PORT HOLD STABILITY MATRIX",
                 specDrivetrain: "DAYS-SUPPLY TURNOVER MEDIAN",
-                cardMaintenance: "CO-OP MARKETING DEVELOPMENT FUND (MDF) REVENUE ALLOCATION",
+                cardMaintenance: "CO-OP MARKETING DEVELOPMENT FUND (MDF) ALLOCATION",
                 chkNameBrakes: "Tier-3 Localized Digital Performance Target Marketing Package",
                 chkNameOil: "Winter Drive Experiential Staging Showroom Assets & Displays",
                 chkNameTires: "Regional French-Speaking Localized Compliance Radio/Print Collaterals",
-                chkNameSoftware: "Regional Luxury Private Executive Gala Event Sponsorship Sponsorship",
+                chkNameSoftware: "Regional Luxury Private Executive Gala Event Sponsorship",
                 cardInvoice: "MDF CLEARING ESCROW LEDGER DETAILED OVERVIEW",
                 invoiceSub: "NET CO-OP FUND REQUEST REQUESTED:",
                 invoiceTax: "ESTIMATED MB CANADA CO-MATCH CONTRIBUTION (13% MATCH):",
@@ -1234,16 +1250,30 @@
                 thDealerSync: "MDF Utilization Rate",
                 thDealerRev: "Wholesale Volume Value",
                 thDealerStatus: "Operational Mode Status",
-                cardChurn: "COGNITIVE STOCK OUT MATRIX & ALLOCATION SURGE VALUE AT RISK",
+                cardChurn: "COGNITIVE STOCK OUT MATRIX & ALLOCATION SURGE RISK",
                 thChurnClient: "Franchise Node Location",
                 thChurnModel: "High-Velocity Stock Asset",
                 thChurnRisk: "Calculated Allocation Supply Interruption Threat",
                 thChurnLTV: "Value At Operational Risk Weight",
                 thChurnAction: "Automated Optimization Correction Recommendation",
                 cardAiLogs: "CRITICAL PLATFORM AI TRANSACTIONARY LOGS",
-                laudonHeader: "LAUDON & LAUDON PRM STRATEGIC SYSTEM MAP: FRANCHISE MEDIATING FACTORS (FIGURE 3.1)"
+                laudonHeader: "LAUDON & LAUDON PRM STRATEGIC SYSTEM MAP: FRANCHISE MEDIATING FACTORS (FIGURE 3.1)",
+                fHeaderEntorno: "ENVIRONMENT",
+                fBodyEntorno: "Mutes severe Canadian weather interruptions across the supply chain. Converts rail freight track bottlenecks directly into automated stock re-routing maneuvers.",
+                fHeaderCultura: "ORGANIZATIONAL CULTURE",
+                fBodyCultura: "Sustains pristine Mercedes luxury expectations across independent dealership entities. Replaces traditional friction-heavy ordering emails with unified corporate transparent dashboards.",
+                fHeaderEstructura: "STRUCTURE",
+                fBodyEstructura: "Binds 55 completely autonomous multi-owner franchises under a secure, integrated corporate node cluster network. Standardizes strict compliance without eroding independent ownership business focus.",
+                fHeaderProcesos: "BUSINESS PROCESSES",
+                fBodyProcesos: "Replaces legacy allocation requests with dynamic automated inventory allocations. Connects current dealer sales performance speeds to global manufacturing plants directly.",
+                fHeaderPoliticas: "POLICIES",
+                fBodyPoliticas: "Mediates corporate-franchisee friction over vehicle allotments. Guarantees absolute fairness in allocation algorithms and ensures local operational compliance with Bill 25 data protection laws.",
+                fHeaderDecisiones: "MANAGEMENT DECISIONS",
+                fBodyDecisiones: "Eliminates reactive supply adjustments. Equips executives with real-time MDF performance metrics and predictive regional inventory depletion models."
             },
             fr: {
+                btnExpClient: "PORTAIL DU CONCESSIONNAIRE",
+                btnExpBusiness: "CONSOLE CORPORATIVE HQ",
                 loginTitle: "Mercedes-Benz Canada",
                 loginSubtitle: "Portail de Gestion des Partenaires (PRM)",
                 userField: "ID Partenaire / Email Corporatif",
@@ -1255,9 +1285,9 @@
                 tabVehState: "KPI DE SANTÉ DE L'AGENCE",
                 tab360: "MATRICE D'ALLOCATION DES STOCKS",
                 tabServices: "FONDS DE MARKETING CO-OP (MDF)",
-                tabShowroom: "NORMES DE CONFORMITÉ DES FRANCHISES",
-                tabDealers: "MATRICE DE DISTRIBUTION NATIONALE",
-                tabPredictive: "MODÉLISATION DES RISQUES PAR IA",
+                tabShowroom: "NORMES DE CONFORMITÉ",
+                tabDealers: "DISTRIBUTION NATIONALE",
+                tabPredictive: "MODÉLISATION DES RISQUES IA",
                 cardTelem: "PERFORMANCE OPÉRATIONNELLE CRITIQUE",
                 telemOil: "TAUX DE CERTIFICATION DES CONSEILLERS (EV/AMG)",
                 telemBrakes: "LATENCE DE CHARGE DE TRAVAIL DES ATELIERS",
@@ -1277,11 +1307,11 @@
                 cardMaintenance: "ALLOCATION DES REVENUS DU FONDS DE MARKETING (MDF)",
                 chkNameBrakes: "Forfait Marketing Digital de Performance Locale (Tier-3)",
                 chkNameOil: "Présentoirs et Actifs de Campagne d'Hiver pour Salle d'Exposition",
-                chkNameTires: "Supports Radio/Presse Localisés en Français (Loi 101/25)",
+                chkNameTires: "Supports Radio/Presse Localisés en Français (Loi 25)",
                 chkNameSoftware: "Parrainage de Gala Exécutif de Luxe et Événement de RP",
                 cardInvoice: "APERÇU DU GRAND LIVRE COMPTABLE MDF",
                 invoiceSub: "DEMANDE NETTE DE FONDS CO-OP:",
-                invoiceTax: "CONTRIBUTION DE CO-MATCH MB CANADA (13% MATCH):",
+                invoiceTax: "CONTRIBUTION DE CO-MATCH MB CANADA (13%):",
                 invoiceTotal: "VERSEMENT TOTAL DU COMPTE TIERS:",
                 authorizeEscrow: "SOUMETTRE LA DEMANDE DE LIBÉRATION DE FONDS MDF",
                 cardShowroom: "CONFORMITÉ DE MARQUE CONCESSIONNAIRE MERCEDES-BENZ",
@@ -1294,14 +1324,26 @@
                 thDealerSync: "Taux d'Utilisation des MDF",
                 thDealerRev: "Valeur du Volume de Vente en Gros",
                 thDealerStatus: "Statut du Niveau Opérationnel (Tier)",
-                cardChurn: "MATRICE COGNITIVE DES RUPTURES DE STOCK ET VALEUR EN RISQUE",
+                cardChurn: "MATRICE COGNITIVE DES RUPTURES DE STOCK ET RISQUE",
                 thChurnClient: "Emplacement du Nœud de Franchise",
                 thChurnModel: "Actif de Stock à Haute Vélocité",
                 thChurnRisk: "Risque Calculé de Rupture d'Approvisionnement",
                 thChurnLTV: "Poids de la Valeur d'Exploitation en Risque",
                 thChurnAction: "Recommandation d'Optimisation Automatisée par l'IA",
                 cardAiLogs: "LOGS TRANSACTIONNELS CRITIQUES DE L'INTELLIGENCE ARTIFICIELLE",
-                laudonHeader: "CARTE DE CONFIGURATION STRATÉGIQUE PRM: FACTEURS FRANCHISÉS (FIGURE 3.1)"
+                laudonHeader: "CARTE DE CONFIGURATION STRATÉGIQUE PRM: FACTEURS FRANCHISÉS (FIGURE 3.1)",
+                fHeaderEntorno: "ENVIRONNEMENT",
+                fBodyEntorno: "Atténue les interruptions climatiques sur la chaîne d'approvisionnement. Convertit les goulots d'étranglement ferroviaires en réaffectations automatiques.",
+                fHeaderCultura: "CULTURE ORGANISATIONNELLE",
+                fBodyCultura: "Maintient les standards de luxe Mercedes dans les franchises indépendantes. Remplace les e-mails par des tableaux de bord unifiés.",
+                fHeaderEstructura: "STRUCTURE",
+                fBodyEstructura: "Relie 55 franchises autonomes sous un cluster corporatif sécurisé. Standardise la conformité sans éroder l'autonomie locale.",
+                fHeaderProcesos: "PROCESSUS D'AFFAIRES",
+                fBodyProcesos: "Remplace les demandes héritées par des allocations dynamiques. Connecte la vitesse des ventes locales à la fabrication mondiale.",
+                fHeaderPoliticas: "POLITIQUES",
+                fBodyPoliticas: "Médie les frictions sur l'allocation des véhicules. Garantit l'équité des algorithmes et la conformité à la Loi 25 sur les données.",
+                fHeaderDecisiones: "DÉCISIONS DE GESTION",
+                fBodyDecisiones: "Élimine les ajustements réactifs. Équipe les dirigeants de métriques MDF en temps réel et de modèles de prévision d'épuisement."
             }
         };
 
@@ -1409,23 +1451,23 @@
             switch(region) {
                 case 'ontario':
                     targetAssetUrl = "https://images.unsplash.com/photo-1618843479619-f93a9825b290?auto=format&fit=crop&q=80&w=1200";
-                    labelText = "Ontario Cluster Node";
-                    configText = "145 Units Preserved";
+                    labelText = (AppState.currentLanguage === 'en') ? "Ontario Cluster Node" : "Nodo del Clúster de Ontario";
+                    configText = (AppState.currentLanguage === 'en') ? "145 Units Preserved" : "145 Unidades Reservadas";
                     break;
                 case 'quebec':
                     targetAssetUrl = "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=1200";
-                    labelText = "Quebec Strategic Sector";
-                    configText = "98 Units Preserved (Law 25 Protected)";
+                    labelText = (AppState.currentLanguage === 'en') ? "Quebec Strategic Sector" : "Sector Estratégico Quebec";
+                    configText = (AppState.currentLanguage === 'en') ? "98 Units Preserved" : "98 Unidades Reservadas (Ley 25)";
                     break;
                 case 'western':
                     targetAssetUrl = "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=1200";
-                    labelText = "Western Mountain Hub (BC/AB)";
-                    configText = "210 Units Preserved (4MATIC Dominant)";
+                    labelText = (AppState.currentLanguage === 'en') ? "Western Mountain Hub" : "Hub Montañoso del Oeste";
+                    configText = (AppState.currentLanguage === 'en') ? "210 Units Preserved" : "210 Unidades Reservadas";
                     break;
                 case 'atlantic':
                     targetAssetUrl = "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1200";
-                    labelText = "Atlantic Coastal Gateway";
-                    configText = "45 Units Staged at Port Hold";
+                    labelText = (AppState.currentLanguage === 'en') ? "Atlantic Coastal Gateway" : "Puerta Costera del Atlántico";
+                    configText = (AppState.currentLanguage === 'en') ? "45 Units Staged" : "45 Unidades Preparadas";
                     break;
             }
 
@@ -1470,18 +1512,18 @@
         }
 
         function triggerAutoAppointment() {
-            alert("SUCCESS: Automated Stock-Swap authorized. Manifest pushed directly to Canadian National Railway routing networks.");
-            logCognitiveEvent("LOGISTICS CORE", "Cross-regional fleet units balance signed off for dealer node ID: 44211.");
+            alert(AppState.currentLanguage === 'en' ? "SUCCESS: Automated Stock-Swap authorized." : "ÉXITO: Transferencia logística de stock autorizada y conectada.");
+            logCognitiveEvent("LOGISTICS CORE", "Fleet units balanced signed off for dealer node ID: 44211.");
         }
 
         function triggerPaymentProcessing() {
-            alert("AUTHENTICATED: Co-Op MDF Request submitted to Toronto HQ Clearing House. Escrow verified.");
+            alert(AppState.currentLanguage === 'en' ? "AUTHENTICATED: Co-Op MDF Request submitted." : "AUTENTICADO: Solicitud MDF enviada a la sede central en Toronto.");
             logCognitiveEvent("MDF ESCROW TRANSACTION", "Ledger request logged into wholesale compliance stack.");
         }
 
         function toggleTelemetryPrivacy(isActive) {
             if(isActive) {
-                alert("PRIVACY MODE ENFORCED: Personal dealer worker data masked under Bill 25 / PIPEDA constraints.");
+                alert(AppState.currentLanguage === 'en' ? "PRIVACY MODE ENFORCED: Personal data masked." : "MODO PRIVACIDAD ACTIVO: Datos del personal enmascarados bajo Ley 25 / PIPEDA.");
                 logCognitiveEvent("COMPLIANCE POLICIES", "Anonymization layer activated for active dealer portal endpoints.");
             } else {
                 logCognitiveEvent("COMPLIANCE POLICIES", "Anonymization removed. Standard corporate metrics telemetry restored.");
@@ -1498,6 +1540,9 @@
             });
 
             const dic = Lexicon[lang];
+
+            document.getElementById('btnExpClient').innerText = dic.btnExpClient;
+            document.getElementById('btnExpBusiness').innerText = dic.btnExpBusiness;
 
             document.getElementById('lblLoginTitle').innerText = dic.loginTitle;
             document.getElementById('lblLoginSubtitle').innerText = dic.loginSubtitle;
@@ -1563,8 +1608,27 @@
             document.getElementById('thChurnLTV').innerText = dic.thChurnLTV;
             document.getElementById('thChurnAction').innerText = dic.thChurnAction;
             document.getElementById('lblCardAiLogs').innerText = dic.cardAiLogs;
+            
             document.getElementById('lblLaudonHeader').innerText = dic.laudonHeader;
+            document.getElementById('fHeaderEntorno').innerText = dic.fHeaderEntorno;
+            document.getElementById('fBodyEntorno').innerText = dic.fBodyEntorno;
+            document.getElementById('fHeaderCultura').innerText = dic.fHeaderCultura;
+            document.getElementById('fBodyCultura').innerText = dic.fBodyCultura;
+            document.getElementById('fHeaderEstructura').innerText = dic.fHeaderEstructura;
+            document.getElementById('fBodyEstructura').innerText = dic.fBodyEstructura;
+            document.getElementById('fHeaderProcesos').innerText = dic.fHeaderProcesos;
+            document.getElementById('fBodyProcesos').innerText = dic.fBodyProcesos;
+            document.getElementById('fHeaderPoliticas').innerText = dic.fHeaderPoliticas;
+            document.getElementById('fBodyPoliticas').innerText = dic.fBodyPoliticas;
+            document.getElementById('fHeaderDecisiones').innerText = dic.fHeaderDecisiones;
+            document.getElementById('fBodyDecisiones').innerText = dic.fBodyDecisiones;
         }
+
+        // Add initialization sequence strictly ensuring Spanish baseline without Spanglish on load.
+        document.addEventListener("DOMContentLoaded", () => {
+            AppState.currentLanguage = 'none'; // Force initial update
+            triggerLanguageSwitch('es');
+        });
     </script>
 </body>
 </html>
